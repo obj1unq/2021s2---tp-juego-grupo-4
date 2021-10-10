@@ -1,6 +1,63 @@
+import wollok.game.*
+import configuraciones.*
+import jugador.*
 
-test "testX" {
+describe "Tests de Pepita" {
+	
+	method initialize() {
+		game.clear()
+		game.addVisual(jugador)
+	}
 
-	assert.that(true)
+
+test "Comprovacion de estado" {
+    
+    jugador.recibirDanio(50)
+    assert.equals(50,jugador.vida())
+    assert.notThat(jugador.perdio())
+    
+    jugador.recibirDanio(50)
+    assert.equals(0,jugador.vida())
+    assert.that(jugador.perdio())
+	}
+	
+	
+test "Movimiento valido" {
+    var posicionAVer = game.at(2,1)
+    assert.notEquals(posicionAVer,jugador.position()) 
+    
+    posicionAVer = game.at(3,1)
+    assert.equals(posicionAVer,jugador.position()) 
+    
+    jugador.mover(arriba)
+    jugador.mover(arriba)
+    posicionAVer = game.at(3,3)
+    assert.equals(posicionAVer,jugador.position()) 
+    }
+	
+		
+test "Movimiento invalido" {
+    var posicionAVer = game.at(3,1)
+    assert.equals(posicionAVer,jugador.position()) 
+    
+    jugador.mover(abajo)
+    jugador.mover(abajo)
+    posicionAVer = game.at(3,-1)
+    assert.notEquals(posicionAVer,jugador.position())
+    
+    posicionAVer = game.at(3,0)
+    assert.equals(posicionAVer,jugador.position()) 
+    
+    jugador.mover(izquierda)
+    jugador.mover(izquierda)
+    jugador.mover(izquierda)
+    posicionAVer = game.at(0,0)
+    assert.equals(posicionAVer,jugador.position()) 
+    
+    jugador.mover(izquierda)
+    posicionAVer = game.at(-1,0)
+    assert.notEquals(posicionAVer,jugador.position())
+    }
+		
 
 }

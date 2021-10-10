@@ -11,6 +11,7 @@ object config {
 		keyboard.right().onPressDo({ jugador.mover(derecha) })
 		keyboard.up().onPressDo({ jugador.mover(arriba) })
 		keyboard.down().onPressDo({ jugador.mover(abajo) })
+		keyboard.x().onPressDo({ jugador.atacar() })
 		
 	 }
 	 

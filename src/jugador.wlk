@@ -5,11 +5,16 @@ object jugador {
 		
     var property vida = 100
 	var property position = game.at(3,1)
-	const poder = 20 // daño del jugador
+	const property poder = 20 // daño del jugador
 
-  method image() = "pepita.png"
+  method image() = if(self.perdio()){    // Temporal
+     "caballero con espada muerto.jpg"
+      }else{
+      "caballero  con espada.png"
+      }
 
 method mover(_direccion) {
+	self.validarMovimiento()
 	self.irASiPuede(_direccion.siguiente(self.position()))
  }
 
@@ -17,7 +22,7 @@ method mover(_direccion) {
     if(self.esValida(nuevaPosicion)){
          position = nuevaPosicion
         }else{
-           game.say(self,"Hay una pared bloqueando mi paso")	// Eliminar desp
+           game.say(self,"Hay una pared bloqueando mi paso")	// Eliminar desp  // Tirar exepcion ??
         }
 	
 	}
@@ -36,11 +41,64 @@ method esValidoEje(eje,num){
      }
  }
 
+method validarMovimiento(){
+	if(self.perdio()){
+	   self.error("Estoy muerto")
+	}
+}
+
  method recibirDanio(cant){ // Nombre temp
- 	vida -= cant 
+ 	vida -= cant
+ 	game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
+ 	if(self.perdio()){
+ 	   self.terminar("Perdi")
+ 	}
+ }
+ 
+ method terminar(mensaje) {
+   game.say(self, mensaje)
+   cartel.text("presione ENTER para salir")
+   keyboard.enter().onPressDo({game.stop()})
+ }
+ 	
+ 
+ method perdio(){
+ 	return vida <= 0 
+ }
+ 
+ method tomarPuntosDeDanio(poderDelGolpe){
+ 	// sirve para evitar bugs 
+ }
+ 
+
+ method atacar(){
+   const dirrecionesAAtacar = #{izquierda,diagonalIzq,arriba,diagonalDer,derecha}
+   game.sound("sword-sound-2.mp3").play()  // sonidito de espada 
+   dirrecionesAAtacar.forEach({ dir => self.atacarHacia(dir) })	 	
+  }
+
+ method atacarHacia(dir){
+ 	areaDeAtaque.desplazarseA(dir.siguiente(self.position())) 
+    areaDeAtaque.hacerAtaque()   // areaDeAtaque esta en el archivo jugador
+   }
+ 
  }
 
+
+object areaDeAtaque{
+  var property position = game.at(0, 0)
+  var property poderGolpe = jugador.poder()
+
+method desplazarseA(dir){
+	position = dir
 }
+	
+ method hacerAtaque(){
+ 	game.whenCollideDo(self, { elemento => elemento.tomarPuntosDeDanio(poderGolpe) })
+  }
+ 	
+}
+
 
 
 object izquierda {
@@ -66,3 +124,26 @@ object abajo {
 		return posicion.down(1)
 	}	
 }
+
+object diagonalIzq {
+   method siguiente(posicion) {
+		return posicion.left(1).up(1)
+	}
+}
+
+object diagonalDer {
+   method siguiente(posicion) {
+		return posicion.right(1).up(1)
+	}
+}
+
+object cartel {
+	var property position = game.center()
+	var property text = ""
+	method textColor() { 
+		return "ff0000ff"
+	}
+}
+
+
+

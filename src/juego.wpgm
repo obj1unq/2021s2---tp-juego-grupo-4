@@ -4,9 +4,11 @@ import jugador.*
 
 program juego {
 	game.title("Juego Base")
-	game.height(6)
-	game.width(6)
+	game.height(7)
+	game.width(7)
 	game.addVisual(jugador)
+	game.addVisual(areaDeAtaque)
+	game.addVisual(cartel)
 	config.configurarTeclas()
 	game.showAttributes(jugador)
 	
