@@ -1,16 +1,19 @@
 import wollok.game.*
 import configuraciones.*
 import jugador.*
+import ninja.*
 
 program juego {
 	game.title("Juego Base")
 	game.height(7)
 	game.width(7)
 	game.addVisual(jugador)
+	game.addVisual(ninja)
 	game.addVisual(areaDeAtaque)
 	game.addVisual(cartel)
 	config.configurarTeclas()
 	game.showAttributes(jugador)
+	game.onTick(2000,"movimiento",{ninja.seMueve()})
 	
 	game.start()
 }
