@@ -96,6 +96,10 @@ method desplazarseA(dir){
  method hacerAtaque(){
  	game.whenCollideDo(self, { elemento => elemento.tomarPuntosDeDanio(poderGolpe) })
   }
+  
+  method recibirDanio(cantidad){
+		//solo para el polimorfismo de la shuriken por ahora
+	}
  	
 }
 
@@ -142,6 +146,9 @@ object cartel {
 	var property text = ""
 	method textColor() { 
 		return "ff0000ff"
+	}
+	method recibirDanio(cantidad){
+		//solo para el polimorfismo de la shuriken por ahora
 	}
 }
 

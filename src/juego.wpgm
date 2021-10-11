@@ -2,6 +2,7 @@ import wollok.game.*
 import configuraciones.*
 import jugador.*
 import ninja.*
+import shuriken.*
 
 program juego {
 	game.title("Juego Base")
@@ -11,9 +12,20 @@ program juego {
 	game.addVisual(ninja)
 	game.addVisual(areaDeAtaque)
 	game.addVisual(cartel)
+	game.addVisual(shuriken)
+	game.addVisual(shuriken2)
+	game.addVisual(shuriken3)
 	config.configurarTeclas()
 	game.showAttributes(jugador)
 	game.onTick(2000,"movimiento",{ninja.seMueve()})
-	
+	game.onTick(6000, "lanzar shuriken", {shuriken.aparecerEn(ninja.position())})
+	game.onTick(6000, "lanzar shuriken", {shuriken2.aparecerEn(ninja.position())})
+	game.onTick(6000, "lanzar shuriken", {shuriken3.aparecerEn(ninja.position())})
+	game.onTick(500,"movimiento",{shuriken.moverse()})
+	game.onTick(500,"movimiento",{shuriken2.moverse()})
+	game.onTick(500,"movimiento",{shuriken3.moverse()})
+	game.whenCollideDo(shuriken, {elemento => elemento.recibirDanio(2)})//puse 2 de daño como ejemplo
+	game.whenCollideDo(shuriken2, {elemento => elemento.recibirDanio(2)})
+	game.whenCollideDo(shuriken3, {elemento => elemento.recibirDanio(2)})
 	game.start()
 }
