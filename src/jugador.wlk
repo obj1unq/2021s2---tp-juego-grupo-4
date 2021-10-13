@@ -147,9 +147,6 @@ object cartel {
 	method textColor() { 
 		return "ff0000ff"
 	}
-	method recibirDanio(cantidad){
-		//solo para el polimorfismo de la shuriken por ahora
-	}
 }
 
 

@@ -2,57 +2,81 @@ import configuraciones.*
 import ninja.*
 import wollok.game.*
 
-object shuriken {
+object shuriken1 {
 	
-	var property position= game.at(9,9)
+	var property position= game.center()
 	method image() = "Shuriken .png"
 	
 	method moverse(){
 		position = position.right(1)
 	}
-	
-	method aparecerEn(posicion){
-		position = posicion
+
+	method aparecer(){
+		position = ninja.position()
+		if (not game.hasVisual(self)){
+			game.addVisual(self)}
 	}
-	method recibirDanio(cantidad){
-		//solo para el polimorfismo de la shuriken por ahora
+	
+	method daniar(objeto){
+		objeto.recibirDanio(2)
+		self.desaparecer()
+		
+	}	
+	
+	method desaparecer(){
+		game.removeVisual(self)
 	}
 	
 }
 
 object shuriken2 {
 	
-	var property position= game.at(9,9)
+	var property position= game.center()
 	method image() = "Shuriken .png"
 	
 	method moverse(){
 		position = position.down(1)
 	}
 	
-	method aparecerEn(posicion){
-		position = posicion
+	method aparecer(){
+		position = ninja.position()
+		if (not game.hasVisual(self)){
+			game.addVisual(self)}
 	}
-	method recibirDanio(cantidad){
-		//solo para el polimorfismo de la shuriken por ahora
+	
+	method daniar(objeto){
+		objeto.recibirDanio(2)
+		self.desaparecer()
+	}
+	
+	method desaparecer(){
+		game.removeVisual(self)
 	}
 	
 }
 
 object shuriken3 {
 	
-	var property position= game.at(9,9)
+	var property position= game.center()
 	method image() = "Shuriken .png"
 	
 	method moverse(){
 		position = position.left(1)
 	}
-	
-	method aparecerEn(posicion){
-		position = posicion
+
+	method aparecer(){
+		position = ninja.position()
+		if (not game.hasVisual(self)){
+			game.addVisual(self)}
 	}
 	
-	method recibirDanio(cantidad){
-		//solo para el polimorfismo de la shuriken por ahora
+	method daniar(objeto){
+		objeto.recibirDanio(2)
+		self.desaparecer()
+	}
+	
+	method desaparecer(){
+		game.removeVisual(self)
 	}
 	
 }

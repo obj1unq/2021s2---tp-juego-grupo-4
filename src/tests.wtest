@@ -10,7 +10,7 @@ describe "Tests de Pepita" {
 	}
 
 
-test "Comprovacion de estado" {
+test "Comprobacion de estado" {
     
     jugador.recibirDanio(50)
     assert.equals(50,jugador.vida())
@@ -57,7 +57,6 @@ test "Movimiento invalido" {
     jugador.mover(izquierda)
     posicionAVer = game.at(-1,0)
     assert.notEquals(posicionAVer,jugador.position())
-    }
-		
+    }		
 
 }
