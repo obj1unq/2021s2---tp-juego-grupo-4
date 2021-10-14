@@ -21,6 +21,7 @@ object nivel1 {
 	
 	config.configurarTeclas()
 	game.showAttributes(jugador)
+	jugador.enemigosNivel(#{ninja})  
 	
 	game.onTick(2000,"movimientoNinja",{ninja.seMueve()})
 	game.onTick(6000,"lanzarShurikens",{ninja.lanzarShurikens()})

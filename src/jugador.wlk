@@ -10,7 +10,8 @@ object jugador {
     var property vida = 100
 	var property position = game.at(3,1)
 	const property poder = 20 // daño del jugador
-
+	var property enemigosNivel = #{}
+	
 method perdio(){ return vida <= 0}
  	 
 method image() = if(self.perdio()){    // Temporal
@@ -57,7 +58,7 @@ method validarMovimiento(){
 
 method recibirDanio(cant){ // Nombre temp
  	vida -= cant
- 	game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
+ 	// game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
  	if(self.perdio()){
  	   self.terminar("Perdi")
  	}
@@ -95,9 +96,13 @@ method desplazarseA(dir){
 }
 	
  method hacerAtaque(){
- 	game.onCollideDo(self, { elemento => elemento.tomarPuntosDeDanio(poderGolpe) })
+ 	game.whenCollideDo(self, { elemento => if (jugador.enemigosNivel().contains(elemento)){
+ 		elemento.tomarPuntosDeDanio(poderGolpe)
+ 	}  
+ 	  })
   }
   
+ 	
 }
 
 
