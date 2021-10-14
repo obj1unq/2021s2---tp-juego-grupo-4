@@ -2,11 +2,13 @@ import wollok.game.*
 import configuraciones.*
 import jugador.*
 
+//modificar el nombre del test
 describe "Tests de Pepita" {
 	
 	method initialize() {
 		game.clear()
 		game.addVisual(jugador)
+//		game.start()
 	}
 
 

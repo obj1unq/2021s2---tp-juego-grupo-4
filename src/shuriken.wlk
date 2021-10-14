@@ -2,6 +2,8 @@ import configuraciones.*
 import ninja.*
 import wollok.game.*
 
+
+//Armar Clase para Shurikens
 object shuriken1 {
 	
 	var property position= game.center()

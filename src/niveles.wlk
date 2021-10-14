@@ -24,16 +24,22 @@ object nivel1 {
 	
 	game.onTick(2000,"movimientoNinja",{ninja.seMueve()})
 	game.onTick(6000,"lanzarShurikens",{ninja.lanzarShurikens()})
+//que moverShurikens se encargue el ninja 	
 	game.onTick(500,"movimientoShurikens",{ self.moverShurikens()}
 	)
-					   						
- 	game.whenCollideDo(jugador, {elemento => if (ninja.shurikens().contains(elemento)){
+	
+//ver bloque de if crear metodo en el ninja				   						
+ 	game.onCollideDo(jugador, {elemento => if (ninja.shurikens().contains(elemento)){
  													elemento.daniar(jugador)}}
  					   )	
 }
-	
+
+// pasarlo al Ninja	
 	method moverShurikens(){
 		ninja.shurikens().forEach({shuriken => shuriken.moverse()})	
 	}
 	
+	method finalizar(){
+		// armar método para finalizar nivel
+	}
 }

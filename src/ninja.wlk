@@ -1,6 +1,8 @@
 import wollok.game.*
 import configuraciones.*
 import shuriken.*
+import niveles.*
+
 
 object ninja{
 	var   property vida = 100
@@ -8,9 +10,9 @@ object ninja{
     const property shurikens =[shuriken1,shuriken2,shuriken3] 
 
 	
-	method image(){
-		return "ninja.png"
-	}	
+	method estaMuerto(){ return vida <= 0}
+	method image()     { return "ninja.png"}
+		
 	
 	method seMueve(){
 		const x = 0.randomUpTo(game.width()).truncate(0) 
@@ -21,7 +23,13 @@ object ninja{
 	method lanzarShurikens(){
 		shurikens.forEach{shuriken => shuriken.aparecer()}
 	}
-		 	
+//se podrá llamar recibirDanio(cant)? 		
+	method tomarPuntosDeDanio(cant){
+		vida -= cant
+		if(self.estaMuerto()){
+			nivel1.finalizar()
+		} 
+	}	 	
 }
 	
 

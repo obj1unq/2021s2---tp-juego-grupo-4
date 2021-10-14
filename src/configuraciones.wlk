@@ -29,3 +29,51 @@ object coordenadas {
 	 		return y
 	 	}
 }
+
+
+object izquierda {
+   method siguiente(posicion) {
+		return posicion.left(1)
+	}
+}
+
+object derecha {
+	method siguiente(posicion) {
+		return posicion.right(1)
+	}	
+}
+
+object arriba {
+	method siguiente(posicion) {
+		return posicion.up(1)
+	}	
+}
+
+object abajo {
+	method siguiente(posicion) {
+		return posicion.down(1)
+	}	
+}
+
+// diagonales hacia arriba
+
+object diagonalIzq {
+   method siguiente(posicion) {
+		return posicion.left(1).up(1)
+	}
+}
+
+object diagonalDer {
+   method siguiente(posicion) {
+		return posicion.right(1).up(1)
+	}
+}
+
+
+object cartel {
+	var property position = game.center()
+	var property text = ""
+	method textColor() { 
+		return "ff0000ff"
+	}
+}

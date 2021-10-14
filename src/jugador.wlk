@@ -1,5 +1,9 @@
 import wollok.game.*
+import configuraciones.*
 
+//Solucionar que el jugador se mueva de dos en dos
+//setear enemigo!
+//opción de estamina
 
 object jugador {
 		
@@ -7,7 +11,9 @@ object jugador {
 	var property position = game.at(3,1)
 	const property poder = 20 // daño del jugador
 
-  method image() = if(self.perdio()){    // Temporal
+method perdio(){ return vida <= 0}
+ 	 
+method image() = if(self.perdio()){    // Temporal
      "caballero con espada muerto.jpg"
       }else{
       "caballero  con espada.png"
@@ -22,17 +28,19 @@ method mover(_direccion) {
     if(self.esValida(nuevaPosicion)){
          position = nuevaPosicion
         }else{
+//lanzar error en lugar de game.say
            game.say(self,"Hay una pared bloqueando mi paso")	// Eliminar desp  // Tirar exepcion ??
         }
 	
 	}
 
- method esValida(posicion){
+method esValida(posicion){
   return self.esValidoEje("x",posicion.x() ) and 
          self.esValidoEje("y",posicion.y() )
 }
 
 
+// reveer metodo para pasarlo a configuraciones, crear objeto eje X {}
 method esValidoEje(eje,num){
  if(eje == "x"){
    return num.between(0,game.width()-1) // Cominza en x=0 
@@ -47,7 +55,7 @@ method validarMovimiento(){
 	}
 }
 
- method recibirDanio(cant){ // Nombre temp
+method recibirDanio(cant){ // Nombre temp
  	vida -= cant
  	game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
  	if(self.perdio()){
@@ -55,24 +63,17 @@ method validarMovimiento(){
  	}
  }
  
- method terminar(mensaje) {
+method terminar(mensaje) {
    game.say(self, mensaje)
    cartel.text("presione ENTER para salir")
    keyboard.enter().onPressDo({game.stop()})
- }
- 	
- 
- method perdio(){
- 	return vida <= 0 
- }
- 
- method tomarPuntosDeDanio(poderDelGolpe){
- 	// sirve para evitar bugs 
  }
  
 
  method atacar(){
    const dirrecionesAAtacar = #{izquierda,diagonalIzq,arriba,diagonalDer,derecha}
+//podría tener esta constante el area de ataque??? method direccionesDeAtaque()
+  
    game.sound("sword-sound-2.mp3").play()  // sonidito de espada 
    dirrecionesAAtacar.forEach({ dir => self.atacarHacia(dir) })	 	
   }
@@ -94,60 +95,12 @@ method desplazarseA(dir){
 }
 	
  method hacerAtaque(){
- 	game.whenCollideDo(self, { elemento => elemento.tomarPuntosDeDanio(poderGolpe) })
+ 	game.onCollideDo(self, { elemento => elemento.tomarPuntosDeDanio(poderGolpe) })
   }
   
-  method recibirDanio(cantidad){
-		//solo para el polimorfismo de la shuriken por ahora
-	}
- 	
 }
 
 
-
-object izquierda {
-   method siguiente(posicion) {
-		return posicion.left(1)
-	}
-}
-
-object derecha {
-	method siguiente(posicion) {
-		return posicion.right(1)
-	}	
-}
-
-object arriba {
-	method siguiente(posicion) {
-		return posicion.up(1)
-	}	
-}
-
-object abajo {
-	method siguiente(posicion) {
-		return posicion.down(1)
-	}	
-}
-
-object diagonalIzq {
-   method siguiente(posicion) {
-		return posicion.left(1).up(1)
-	}
-}
-
-object diagonalDer {
-   method siguiente(posicion) {
-		return posicion.right(1).up(1)
-	}
-}
-
-object cartel {
-	var property position = game.center()
-	var property text = ""
-	method textColor() { 
-		return "ff0000ff"
-	}
-}
 
 
 
