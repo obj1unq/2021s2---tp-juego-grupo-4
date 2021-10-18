@@ -72,17 +72,11 @@ method terminar(mensaje) {
  
 
  method atacar(){
-   const dirrecionesAAtacar = #{izquierda,diagonalIzq,arriba,diagonalDer,derecha}
-//podría tener esta constante el area de ataque??? method direccionesDeAtaque()
-  
-   game.sound("sword-sound-2.mp3").play()  // sonidito de espada 
-   dirrecionesAAtacar.forEach({ dir => self.atacarHacia(dir) })	 	
-  }
+ 	areaDeAtaque.atacar()
+ }
+   
 
- method atacarHacia(dir){
- 	areaDeAtaque.desplazarseA(dir.siguiente(self.position())) 
-    areaDeAtaque.hacerAtaque()   // areaDeAtaque esta en el archivo jugador
-   }
+ 
  
  }
 
@@ -94,6 +88,19 @@ object areaDeAtaque{
 method desplazarseA(dir){
 	position = dir
 }
+
+method atacar(){
+	const dirrecionesAAtacar = #{izquierda,diagonalIzq,arriba,diagonalDer,derecha}
+  //podría tener esta constante el area de ataque??? method direccionesDeAtaque()
+   game.sound("sword-sound-2.mp3").play()  // sonidito de espada 
+   dirrecionesAAtacar.forEach({ dir => self.atacarHacia(dir) })	 	
+  
+}
+
+method atacarHacia(dir){
+ 	self.desplazarseA(dir.siguiente(self.position())) 
+    self.hacerAtaque()   // areaDeAtaque esta en el archivo jugador
+   }
 	
  method hacerAtaque(){
  	game.whenCollideDo(self, { elemento => if (jugador.enemigosNivel().contains(elemento)){
