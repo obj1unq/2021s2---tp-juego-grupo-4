@@ -7,6 +7,12 @@ import niveles.*
 object ninja{
 	var   property vida = 100
     var   property position = game.center()
+    
+    const shuriken1 = new Shuriken( dir = izquierda )
+    const shuriken2 = new Shuriken( dir = abajo )
+    const shuriken3 = new Shuriken( dir = derecha )
+    
+    
     const property shurikens =[shuriken1,shuriken2,shuriken3] 
 
 	
