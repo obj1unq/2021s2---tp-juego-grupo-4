@@ -1,115 +1,136 @@
 import wollok.game.*
 import configuraciones.*
 
-//Solucionar que el jugador se mueva de dos en dos
-//setear enemigo!
+
 //opción de estamina
 
+//+--------------------------------------------------------------------------------------------------+
+//|                                 JUGADOR                                                          |
+//+--------------------------------------------------------------------------------------------------+
 object jugador {
 		
-    var property vida = 100
-	var property position = game.at(3,1)
-	const property poder = 20 // daño del jugador
-	var property enemigosNivel = #{}
+    var   property  vida          = 100
+	var   property  position      = game.at(3,1)
+	const property  poder         = 20 // daño del jugador
+	var   property  enemigosNivel = #{}
 	
-method perdio(){ return vida <= 0}
- 	 
-method image() = if(self.perdio()){    // Temporal
+//	method perdio(){ return vida <= 0}
+	method estaMuerto(){ return vida <= 0}
+		
+//	method image() = if(self.perdio()){    // Temporal
+	method image() = if(self.estaMuerto()){   
      "caballero con espada muerto.jpg"
       }else{
       "caballero  con espada.png"
       }
 
-method mover(_direccion) {
-	self.validarMovimiento()
-	self.irASiPuede(_direccion.siguiente(self.position()))
- }
+	method esEnemigo(elemento){
+		return enemigosNivel.contains(elemento)
+	}
+	
+	method mover(_direccion) {
+		self.validarMovimiento()
+//		self.irASiPuede(_direccion.siguiente(self.position()))
+		self.irASiPuede(_direccion.siguiente(position))
+	 }
 
- method irASiPuede(nuevaPosicion) {
-    if(self.esValida(nuevaPosicion)){
-         position = nuevaPosicion
+ 	method irASiPuede(nuevaPosicion) {
+//    	if(self.esValida(nuevaPosicion)){
+		if (coordenadas.posicionValida(nuevaPosicion)){
+       	  position = nuevaPosicion
         }else{
 //lanzar error en lugar de game.say
-           game.say(self,"Hay una pared bloqueando mi paso")	// Eliminar desp  // Tirar exepcion ??
+          game.say(self,"Hay una pared bloqueando mi paso")	// Eliminar desp  // Tirar exepcion ??
         }
 	
 	}
 
-method esValida(posicion){
-  return self.esValidoEje("x",posicion.x() ) and 
-         self.esValidoEje("y",posicion.y() )
-}
+//	method esValida(posicion){
+// 		return self.esValidoEje("x",posicion.x() ) and 
+//        self.esValidoEje("y",posicion.y() )
+//	}
 
 
 // reveer metodo para pasarlo a configuraciones, crear objeto eje X {}
-method esValidoEje(eje,num){
- if(eje == "x"){
-   return num.between(0,game.width()-1) // Cominza en x=0 
- }else{
-   return num.between(0,game.height()-1)// Cominza en y=0  
-     }
- }
+//	method esValidoEje(eje,num){
+//	if(eje == "x"){
+//  	 	return num.between(0,game.width()-1) // Cominza en x=0 
+// 	}else{
+//   		return num.between(0,game.height()-1)// Cominza en y=0  
+//     }
+// 	}
 
-method validarMovimiento(){
-	if(self.perdio()){
-	   self.error("Estoy muerto")
+	method validarMovimiento(){
+//		if(self.perdio()){
+		if(self.estaMuerto()){
+	 	  self.error("Estoy muerto")
+		}
 	}
-}
 
-method recibirDanio(cant){ // Nombre temp
- 	vida -= cant
- 	// game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
- 	if(self.perdio()){
- 	   self.terminar("Perdi")
+	method recibirDanio(cant){ // Nombre temp
+ 		vida -= cant
+ 		game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
+ //		if(self.perdio()){
+ // 	  self.terminar("Perdi")
+ 		if(self.estaMuerto()){
+			gameOver.iniciar()
+ 		}
  	}
- }
  
-method terminar(mensaje) {
-   game.say(self, mensaje)
-   cartel.text("presione ENTER para salir")
-   keyboard.enter().onPressDo({game.stop()})
- }
- 
+//	method terminar(mensaje) {
+//   		game.say(self, mensaje)
+//  		cartel.text("presione ENTER para salir")
+//   		keyboard.enter().onPressDo({game.stop()})
+// 	}
 
- method atacar(){
- 	areaDeAtaque.atacar()
- }
+
+
+
+/* 
+ 	method atacar(){
+ 		
+ 		areaDeAtaque.atacar()
+ 	}
+ 	 
+ */
+ // METODO CREADO MOMENTANEAMENTE PARA VER LA MUERTE DEL NINJA
+ 	method atacar(){
+ 		game.onCollideDo(self,{elemento => if(self.esEnemigo(elemento)){
+ 											elemento.tomarPuntosDeDanio(40)}})
+ 	}
+ 	
+ 	
    
-
- 
- 
  }
-
+ 
+//+--------------------------------------------------------------------------------------------------+
+//|                                 AREA DE ATAQUE                                                   |
+//+--------------------------------------------------------------------------------------------------+
 
 object areaDeAtaque{
-  var property position = game.at(0, 0)
-  var property poderGolpe = jugador.poder()
+  var property  position   = game.at(0, 0)
+  var property  poderGolpe = jugador.poder()
 
-method desplazarseA(dir){
-	position = dir
-}
+	method desplazarseA(dir){
+		position = dir
+	}
 
-method atacar(){
-	const dirrecionesAAtacar = #{izquierda,diagonalIzq,arriba,diagonalDer,derecha}
-  //podría tener esta constante el area de ataque??? method direccionesDeAtaque()
-   game.sound("sword-sound-2.mp3").play()  // sonidito de espada 
-   dirrecionesAAtacar.forEach({ dir => self.atacarHacia(dir) })	 	
-  
-}
+	method atacar(){
+		const dirrecionesAAtacar = #{izquierda,diagonalIzq,arriba,diagonalDer,derecha}
+  		//podría tener esta constante el area de ataque??? method direccionesDeAtaque()
+   		game.sound("sword-sound-2.mp3").play()  // sonidito de espada 
+   		dirrecionesAAtacar.forEach({ dir => self.atacarHacia(dir) })	 	
+	}
 
-method atacarHacia(dir){
- 	self.desplazarseA(dir.siguiente(self.position())) 
-    self.hacerAtaque()   // areaDeAtaque esta en el archivo jugador
+	method atacarHacia(dir){
+ 		self.desplazarseA(dir.siguiente(self.position())) 
+    	self.hacerAtaque()   // areaDeAtaque esta en el archivo jugador
    }
 	
- method hacerAtaque(){
- 	game.whenCollideDo(self, { elemento => if (jugador.enemigosNivel().contains(elemento)){
- 		elemento.tomarPuntosDeDanio(poderGolpe)
- 	}  
- 	  })
-  }
-  
- 	
+ 	method hacerAtaque(){
+ 		game.whenCollideDo(self, { elemento => if (jugador.enemigosNivel().contains(elemento)){
+ 														elemento.tomarPuntosDeDanio(poderGolpe)}}) 																		
+  	}
 }
 
 

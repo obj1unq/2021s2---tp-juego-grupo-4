@@ -4,14 +4,15 @@ import jugador.*
 import ninja.*
 import shuriken.*
 
-
+//+--------------------------------------------------------------------------------------------------+
+//|                                 NIVEL 1                                                          |
+//+--------------------------------------------------------------------------------------------------+
 object nivel1 {
 	
-//	method pasaDeNivel(){
-//		return ninja.estaMuerto()
-//	}
-
-
+	method nivelGanado(){
+		return ninja.estaMuerto()
+	}
+	
 	method iniciar(){
 //	game.boardGround(image)
 	game.addVisual(jugador)
@@ -23,24 +24,30 @@ object nivel1 {
 	game.showAttributes(jugador)
 	jugador.enemigosNivel(#{ninja})  
 	
-	game.onTick(2000,"movimientoNinja",{ninja.seMueve()})
-	game.onTick(6000,"lanzarShurikens",{ninja.lanzarShurikens()})
-//que moverShurikens se encargue el ninja 	
-	game.onTick(500,"movimientoShurikens",{ self.moverShurikens()}
-	)
+	self.agregarEventos()
 	
-//ver bloque de if crear metodo en el ninja				   						
- 	game.onCollideDo(jugador, {elemento => if (ninja.shurikens().contains(elemento)){
- 													elemento.daniar(jugador)}}
- 					   )	
-}
-
-// pasarlo al Ninja	
-	method moverShurikens(){
-		ninja.shurikens().forEach({shuriken => shuriken.moverse()})	
+	game.onCollideDo(jugador, {elemento => if (ninja.esUnShuriken(elemento)){elemento.daniar(jugador)}})
+	}
+	
+	
+	method agregarEventos(){
+ 		if (not self.nivelGanado()){
+			game.onTick(2000,"movimientoNinja",{ninja.seMueve()})
+			game.onTick(6000,"lanzarShurikens",{ninja.lanzarShurikens()})	
+			game.onTick(500,"movimientoShurikens",{ ninja.desplazarShurikens()})
+ 		}
+	}
+	
+	method removerEventos(){
+		game.removeTickEvent("movimientoNinja")
+		game.removeTickEvent("lanzarShurikens")
+		game.removeTickEvent("movimientoShurikens")
 	}
 	
 	method finalizar(){
-		// armar método para finalizar nivel
 	}
+	
 }
+	
+	
+

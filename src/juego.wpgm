@@ -10,7 +10,9 @@ program juego {
 	game.height(7)
 	game.width(7)
 	
- 	nivel1.iniciar()
-	game.showAttributes(jugador)
+	nivel1.iniciar()
+// estaba repetido controlar donde correspondería ir 	
+//	game.showAttributes(jugador)
 	game.start()
+	
 }

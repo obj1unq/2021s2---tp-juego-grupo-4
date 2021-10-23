@@ -11,16 +11,16 @@ describe "Tests de Pepita" {
 //		game.start()
 	}
 
-
+ 
 test "Comprobacion de estado" {
     
     jugador.recibirDanio(50)
     assert.equals(50,jugador.vida())
-    assert.notThat(jugador.perdio())
+    assert.notThat(jugador.estaMuerto())
     
     jugador.recibirDanio(50)
     assert.equals(0,jugador.vida())
-    assert.that(jugador.perdio())
+    assert.that(jugador.estaMuerto())
 	}
 	
 	
