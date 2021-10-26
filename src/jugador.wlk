@@ -1,5 +1,6 @@
 import wollok.game.*
 import configuraciones.*
+import ninja.*
 
 
 
@@ -69,9 +70,13 @@ object jugador {
  */
  // METODO CREADO MOMENTANEAMENTE PARA VER LA MUERTE DEL NINJA
  	method atacar(){
-		game.sound("sword-sound-2.mp3").play()	
- 		game.onCollideDo(self,{elemento => if(self.esEnemigo(elemento)){
- 											elemento.tomarPuntosDeDanio(40)}})
+ 		const elemento = game.colliders(self).head()
+ 		
+		game.sound("sword-sound-2.mp3").play()		
+// arreglar este if para que desaparezca y hay polimorfismo		
+//				elemento => self.daniar(elemento)
+ 		if(self.esEnemigo(elemento)){elemento.tomarPuntosDeDanio(40)}
+ 																													
  	}
  	
  }

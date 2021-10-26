@@ -4,6 +4,8 @@ import jugador.*
 import ninja.*
 import shuriken.*
 
+
+
 //+--------------------------------------------------------------------------------------------------+
 //|                                 NIVEL 1                                                          |
 //+--------------------------------------------------------------------------------------------------+
@@ -17,7 +19,7 @@ object nivel1 {
 //	game.boardGround(image)
 	game.addVisual(jugador)
 	game.addVisual(ninja)
-	game.addVisual(areaDeAtaque)
+ 	game.addVisual(areaDeAtaque)
 	game.addVisual(cartel)
 	
 	config.configurarTeclas()
@@ -25,17 +27,15 @@ object nivel1 {
 	jugador.enemigosNivel(#{ninja})  
 	
 	self.agregarEventos()
-	
+//sacar ese if para meter el polimorfismo elemento => elemento.daniar(jugador)
 	game.onCollideDo(jugador, {elemento => if (ninja.esUnShuriken(elemento)){elemento.daniar(jugador)}})
 	}
 	
 	
 	method agregarEventos(){
- 		if (not self.nivelGanado()){
 			game.onTick(2000,"movimientoNinja",{ninja.seMueve()})
 			game.onTick(6000,"lanzarShurikens",{ninja.lanzarShurikens()})	
 			game.onTick(500,"movimientoShurikens",{ ninja.desplazarShurikens()})
- 		}
 	}
 	
 	method removerEventos(){

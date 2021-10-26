@@ -3,7 +3,7 @@ import configuraciones.*
 import jugador.*
 
 //modificar el nombre del test
-describe "Tests de Pepita" {
+describe "Tests de Juego" {
 	
 	method initialize() {
 		game.clear()

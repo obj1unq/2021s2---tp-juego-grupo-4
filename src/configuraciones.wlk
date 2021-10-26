@@ -2,6 +2,12 @@ import jugador.*
 import wollok.game.*
 
 
+
+// if de ataque al jugador, eliminar todo lo que corresponde a los enemigos del jugador
+
+// crear enemigo tipo dementor que persiga al jugador que desaparezca frente a un ataque del jugador
+// y se vuelva a invocar. (ontick variable) puede aparecer mas de uno a la vez. Sacan poca vida (5)
+
 //+--------------------------------------------------------------------------------------------------+
 //|                                 TECLAS                                                           |
 //+--------------------------------------------------------------------------------------------------+
