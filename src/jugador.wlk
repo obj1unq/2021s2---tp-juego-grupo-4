@@ -9,12 +9,11 @@ import ninja.*
 //+--------------------------------------------------------------------------------------------------+
 //|                                 JUGADOR                                                          |
 //+--------------------------------------------------------------------------------------------------+
-object jugador {
+object jugador inherits ObjetoEnPantalla{
 		
     var   property  vida          = 100
 	var   property  position      = game.at(3,1)
 	const property  poder         = 20 // daño del jugador
-	var   property  enemigosNivel = #{}
 
 
 	method estaMuerto(){ return vida <= 0}
@@ -26,10 +25,7 @@ object jugador {
       "caballero  con espada.png"
       }
 
-	method esEnemigo(elemento){
-		return enemigosNivel.contains(elemento)
-	}
-	
+		
 	method mover(_direccion) {
 		self.validarMovimiento()
 		self.irASiPuede(_direccion.siguiente(position))
@@ -61,53 +57,46 @@ object jugador {
  	}
 
 
-/* 
- 	method atacar(){
- 		
- 		areaDeAtaque.atacar()
+ /*
+ method atacar(){	
+ 	 areaDeAtaque.atacar()
  	}
- 	 
- */
- // METODO CREADO MOMENTANEAMENTE PARA VER LA MUERTE DEL NINJA
- 	method atacar(){
- 		const elemento = game.colliders(self).head()
- 		
-		game.sound("sword-sound-2.mp3").play()		
-// arreglar este if para que desaparezca y hay polimorfismo		
-//				elemento => self.daniar(elemento)
- 		if(self.esEnemigo(elemento)){elemento.tomarPuntosDeDanio(40)}
- 																													
- 	}
+*/
+  method atacar(dir){
+  	 game.sound("sword-sound-2.mp3").play()  // sonidito de espada 	
+ 	 areaDeAtaque.atacarHacia(dir)
  	
- }
- 
+ 	}
+ }	 
+
 //+--------------------------------------------------------------------------------------------------+
 //|                                 AREA DE ATAQUE                                                   |
 //+--------------------------------------------------------------------------------------------------+
 
-object areaDeAtaque{
+ object areaDeAtaque inherits ObjetoEnPantalla{
   var property  position   = game.at(0, 0)
   var property  poderGolpe = jugador.poder()
+
+  method image() = "Shuriken.png"  // solo para testear
 
 	method desplazarseA(dir){
 		position = dir
 	}
-
+/*
 	method atacar(){
 		const dirrecionesAAtacar = #{izquierda,diagonalIzq,arriba,diagonalDer,derecha}
-  		//podría tener esta constante el area de ataque??? method direccionesDeAtaque()
    		game.sound("sword-sound-2.mp3").play()  // sonidito de espada 
    		dirrecionesAAtacar.forEach({ dir => self.atacarHacia(dir) })	 	
 	}
+*/
 
 	method atacarHacia(dir){
- 		self.desplazarseA(dir.siguiente(self.position())) 
-    	self.hacerAtaque()   // areaDeAtaque esta en el archivo jugador
+ 		self.desplazarseA(dir.siguiente(jugador.position())) 
+    	self.hacerAtaque()   
    }
 	
  	method hacerAtaque(){
- 		game.whenCollideDo(self, { elemento => if (jugador.enemigosNivel().contains(elemento)){
- 														elemento.tomarPuntosDeDanio(poderGolpe)}}) 																		
+ 		game.whenCollideDo(self, { elemento => elemento.tomarPuntosDeDanio(poderGolpe)}) 																		
   	}
 }
 

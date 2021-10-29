@@ -11,8 +11,7 @@ program juego {
 	game.width(7)
 	
 	nivel1.iniciar()
-// estaba repetido controlar donde correspondería ir 	
-//	game.showAttributes(jugador)
+
 	game.start()
 	
 }

@@ -22,10 +22,10 @@ object nivel1 {
  	game.addVisual(areaDeAtaque)
 	game.addVisual(cartel)
 	
+	
 	config.configurarTeclas()
 	game.showAttributes(jugador)
-	jugador.enemigosNivel(#{ninja})  
-	
+		
 	self.agregarEventos()
 //sacar ese if para meter el polimorfismo elemento => elemento.daniar(jugador)
 	game.onCollideDo(jugador, {elemento => if (ninja.esUnShuriken(elemento)){elemento.daniar(jugador)}})
@@ -49,5 +49,32 @@ object nivel1 {
 	
 }
 	
+
+/*
+ method nivelPerdido(){
+  return jugador.estaMuerto()
+ } 
+  
+  
+ 
+	method finalizar(){
+	  if(self.nivelGanado() || self.nivelPerdio()){
+	     self.terminarNivel()
+	}
+	 
+	 
+ method terminarNivel(){
+   if(self.nivelGanado()){
+     gameOver.ganarNivel(1)
+   }else{
+     gameOver.iniciar()
+     }
+ }	
+	
+	 
+*/
+
+
+
 	
 

@@ -5,7 +5,7 @@ import niveles.*
 
 //agregar imagen de ninja muerto 
 
-object ninja{
+object ninja inherits ObjetoEnPantalla{
 	var  property  vida     = 100
     var  property  position = game.center()
     
@@ -48,7 +48,7 @@ object ninja{
  	}
 	
 //se podrá llamar recibirDanio(cant)? 		
-	method tomarPuntosDeDanio(cant){
+	override method tomarPuntosDeDanio(cant){
 		vida -= cant
 		if(self.estaMuerto()){
 			self.seDetiene()

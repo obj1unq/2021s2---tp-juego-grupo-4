@@ -5,7 +5,7 @@ import wollok.game.*
 //armar objeto contenedor de shurikens para que se encargue de la responsabilidad de los 
 //Shurikens( hacer mapeo de las shurikens con lista direcciones) 
 
-class  Shuriken {
+class  Shuriken inherits ObjetoEnPantalla{
 	
 	var property  position  = game.center()
 	var property  direccion = izquierda
