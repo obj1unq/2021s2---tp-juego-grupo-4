@@ -36,9 +36,11 @@ object nivel1 {
 			game.onTick(2000,"movimientoNinja",{ninja.seMueve()})
 			game.onTick(6000,"lanzarShurikens",{ninja.lanzarShurikens()})	
 			game.onTick(500,"movimientoShurikens",{ ninja.desplazarShurikens()})
+		
+			game.onTick(500,"ganarEnergiaJugador",{ jugador.ganarEnergia(1)})
 	}
 	
-	method removerEventos(){
+	method removerEventos(){  
 		game.removeTickEvent("movimientoNinja")
 		game.removeTickEvent("lanzarShurikens")
 		game.removeTickEvent("movimientoShurikens")

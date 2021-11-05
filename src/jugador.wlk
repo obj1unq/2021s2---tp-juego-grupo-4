@@ -14,6 +14,7 @@ object jugador inherits ObjetoEnPantalla{
     var   property  vida          = 100
 	var   property  position      = game.at(3,1)
 	const property  poder         = 20 // daño del jugador
+	var   property  energia        =  4
 
 
 	method estaMuerto(){ return vida <= 0}
@@ -56,19 +57,27 @@ object jugador inherits ObjetoEnPantalla{
  		}
  	}
 
-
- /*
- method atacar(){	
- 	 areaDeAtaque.atacar()
- 	}
-*/
   method atacar(dir){
-  	 game.sound("sword-sound-2.mp3").play()  // sonidito de espada 	
- 	 areaDeAtaque.atacarHacia(dir)
- 	
- 	}
- }	 
-
+  	 if(self.tieneEnergia()){
+  	 	 game.sound("sword-sound-2.mp3").play()  // sonidito de espada 	
+ 	     areaDeAtaque.atacarHacia(dir)
+ 	     energia -= 1
+ 	     }
+  	 }
+  	 
+  method tieneEnergia(){
+  	return energia > 0
+  }	
+  
+  method ganarEnergia(cant){ //suponer que 4 es el max que puede tener 
+  	if(energia + cant >= 4){
+  		 energia = 4 
+  	}else{
+  		 energia = 0.max(energia + cant)
+  	} 
+  }
+  
+}
 //+--------------------------------------------------------------------------------------------------+
 //|                                 AREA DE ATAQUE                                                   |
 //+--------------------------------------------------------------------------------------------------+
