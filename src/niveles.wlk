@@ -29,6 +29,7 @@ object nivel1 {
 	self.agregarEventos()
 //sacar ese if para meter el polimorfismo elemento => elemento.daniar(jugador)
 	game.onCollideDo(jugador, {elemento => if (ninja.esUnShuriken(elemento)){elemento.daniar(jugador)}})
+	
 	}
 	
 	
@@ -46,24 +47,22 @@ object nivel1 {
 		game.removeTickEvent("movimientoShurikens")
 	}
 	
-	method finalizar(){
-	}
+	
+  
+ 
 	
 }
 	
+
+
+  
+	 
+
 
 /*
  method nivelPerdido(){
   return jugador.estaMuerto()
  } 
-  
-  
- 
-	method finalizar(){
-	  if(self.nivelGanado() || self.nivelPerdio()){
-	     self.terminarNivel()
-	}
-	 
 	 
  method terminarNivel(){
    if(self.nivelGanado()){

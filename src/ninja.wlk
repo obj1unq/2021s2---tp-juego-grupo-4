@@ -52,6 +52,8 @@ object ninja inherits ObjetoEnPantalla{
 		vida -= cant
 		if(self.estaMuerto()){
 			self.seDetiene()
+			game.removeVisual(self)
+ 	        gameOver.iniciar() 
 		} 	
 	}
 	
