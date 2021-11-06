@@ -117,3 +117,9 @@ class ObjetoEnPantalla {
 	
 }
 
+class Enemigo inherits ObjetoEnPantalla { // usar Herencias 
+	
+}
+
+
+
