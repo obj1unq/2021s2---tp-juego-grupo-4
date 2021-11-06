@@ -5,7 +5,7 @@ import niveles.*
 
 //agregar imagen de ninja muerto 
 
-object ninja inherits ObjetoEnPantalla{
+object ninja inherits Enemigo{
 	var  property  vida     = 100
     var  property  position = game.center()
     
@@ -17,19 +17,19 @@ object ninja inherits ObjetoEnPantalla{
 
 	
 	method image(){ return "ninja.png"}
-	method estaMuerto(){ return vida <= 0}	
+	override method estaMuerto(){ return vida <= 0}	
 	
 	method esUnShuriken(elemento){return shurikens.contains(elemento)}
 			
 	
-	method seMueve(){
+	override method seMueve(){
 		const x = (coordenadas.x().anyOne()).truncate(0) 
 		const y = (coordenadas.y().anyOne()).truncate(0) 
 		
 			position = game.at(x,y)	
 	}
 	
-	method seDetiene(){
+	override method seDetiene(){
 		game.say(self,"he sido derrotado")  //sacar mensaje
 		self.removerShurikens()
 		nivel1.removerEventos()

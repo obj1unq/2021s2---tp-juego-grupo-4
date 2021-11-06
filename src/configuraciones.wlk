@@ -119,6 +119,11 @@ class ObjetoEnPantalla {
 
 class Enemigo inherits ObjetoEnPantalla { // usar Herencias 
 	
+	method estaMuerto()
+	method seMueve()
+	method seDetiene()
+	 
+	
 }
 
 

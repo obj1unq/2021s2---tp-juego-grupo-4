@@ -3,6 +3,7 @@ import configuraciones.*
 import jugador.*
 import ninja.*
 import shuriken.*
+import Fantasma.*
 
 
 //+--------------------------------------------------------------------------------------------------+
@@ -11,19 +12,23 @@ import shuriken.*
 
 class Nivel {  // => hacer herencia para todos los niveles 
 	
+	method iniciar()
+	method agregarEventos()
+	method removerEventos()
+	method nivelGanado()
 }
 
 
 //+--------------------------------------------------------------------------------------------------+
 //|                                 NIVEL 1                                                          |
 //+--------------------------------------------------------------------------------------------------+
-object nivel1 {  // inherits Nivel
+object nivel1 inherits Nivel {
 	
-	method nivelGanado(){
+	override method nivelGanado(){
 		return ninja.estaMuerto()
 	}
 	
-	method iniciar(){
+	override method iniciar(){
 //	game.boardGround(image)
 	game.addVisual(jugador)
 	game.addVisual(ninja)
@@ -41,7 +46,7 @@ object nivel1 {  // inherits Nivel
 	}
 	
 	
-	method agregarEventos(){
+	override method agregarEventos(){
 			game.onTick(2000,"movimientoNinja",{ninja.seMueve()})
 			game.onTick(6000,"lanzarShurikens",{ninja.lanzarShurikens()})	
 			game.onTick(500,"movimientoShurikens",{ ninja.desplazarShurikens()})
@@ -49,18 +54,44 @@ object nivel1 {  // inherits Nivel
 			game.onTick(500,"ganarEnergiaJugador",{ jugador.ganarEnergia(1)})
 	}
 	
-	method removerEventos(){  
+	override method removerEventos(){  
 		game.removeTickEvent("movimientoNinja")
 		game.removeTickEvent("lanzarShurikens")
 		game.removeTickEvent("movimientoShurikens")
 	}
-	
-	
-  
- 
-	
+		
 }
+
+//+--------------------------------------------------------------------------------------------------+
+//|                                 NIVEL 2                                                          |
+//+--------------------------------------------------------------------------------------------------+
+
+  object nivel2 inherits Nivel {
+  	
+  override method iniciar(){
+  	//	game.boardGround(image)
+	game.addVisual(jugador)
+	game.addVisual(areaDeAtaque)
+	game.addVisual(fantasmas)
+ 
+	game.addVisual(cartel)
+		
+	config.configurarTeclas()
+	game.showAttributes(jugador)
+		
+	self.agregarEventos()
+  }
+  
+  
+	override method agregarEventos(){}
 	
+	override method removerEventos(){}
+	
+	override method nivelGanado(){
+		return fantasmas.estanVencidos()
+	}
+  	
+  }
 
 
   
