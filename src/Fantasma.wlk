@@ -2,7 +2,7 @@ import wollok.game.*
 import configuraciones.*
 import niveles.*
 import jugador.*
-
+//prueba
 object  fantasmas{
 	var property fantasmas=  #{fantasma1,fantasma2,fantasma3,fantasma4} 
 	
