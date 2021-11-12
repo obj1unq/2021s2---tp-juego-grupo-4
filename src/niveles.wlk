@@ -114,21 +114,6 @@ object nivel1 inherits Nivel {
 	 
 
 
-/*
- method nivelPerdido(){
-  return jugador.estaMuerto()
- } 
-	 
- method terminarNivel(){
-   if(self.nivelGanado()){
-     gameOver.ganarNivel(1)
-   }else{
-     gameOver.iniciar()
-     }
- }	
-	
-	 
-*/
 
 
 

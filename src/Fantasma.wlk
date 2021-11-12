@@ -3,6 +3,7 @@ import configuraciones.*
 import niveles.*
 import jugador.*
 
+
 object  fantasmas {
 	var property fantasmas  // =  #{fantasma1,fantasma2,fantasma3,fantasma4} 
 	const property position = game.center() // ver 
