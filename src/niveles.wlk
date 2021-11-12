@@ -88,6 +88,8 @@ object nivel1 inherits Nivel {
 	game.showAttributes(jugador)
 		
 	self.agregarEventos()
+	game.onCollideDo(jugador, {elemento => elemento.daniar(jugador)})
+	
   }
   
   
