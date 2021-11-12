@@ -3,16 +3,21 @@ import configuraciones.*
 import niveles.*
 import jugador.*
 
-object  fantasmas{
-	var property fantasmas=  #{fantasma1,fantasma2,fantasma3,fantasma4} 
-	
+object  fantasmas {
+	var property fantasmas  // =  #{fantasma1,fantasma2,fantasma3,fantasma4} 
+	const property position = game.center() // ver 
+/*	
 	const fantasma1 = new Fantasma( position = game.at(0, 0) )
     const fantasma2 = new Fantasma( position = game.at(game.width() - 1, 0) )
     const fantasma3 = new Fantasma( position = game.at(0, game.height() - 1) )
     const fantasma4 = new Fantasma( position = game.at(game.width() - 1, game.height() - 1))
-    
+*/  
     method estanVencidos(){
     	return fantasmas.size() == 0 
+    }
+    
+     method tomarPuntosDeDanio(poderGolpe){
+    	self.removerFantasmasLiberados()
     }
     
    method removerFantasmasLiberados(){
@@ -21,6 +26,10 @@ object  fantasmas{
    
    method moverFantasmas(){
    	 fantasmas.forEach({fantasma => fantasma.seMueve()})
+   }
+   
+   method aparecerFantasmas(){
+   	 fantasmas.forEach({fantasma => fantasma.aparecer()})
    } 
     
 }
@@ -28,22 +37,32 @@ object  fantasmas{
 
 class Fantasma inherits Enemigo{
 	var property vida = 4  
-	var property position 
-	method image() = "Fantasma.png"  // imagen temp
+	var property position = game.at(-1,-1)
+	method image() = "caballero con espada muerto.jpg" //"Fantasma.png"  // imagen temp
 	
 	override method seMueve(){
-	   if(position.x() == jugador.position().x()){
-	   	  self.position().arriba()
+	   if(self.estaEnLaMismaFilaQueELJugador() ){
+	   	  self.acercarseHaciaElJugador()  // self.position().arriba()
 	   }else{
 	   	 self.coordinarEjeX()
 	   }	
 	}
 	
+	method estaEnLaMismaFilaQueELJugador(){return position.x() == jugador.position().x()}
+	
+	method acercarseHaciaElJugador(){
+		if(position.y() > jugador.position().y()){
+		   position = abajo.siguiente(position)
+		}else{
+		   position = arriba.siguiente(position)
+		}
+	}
+	
 	method coordinarEjeX(){
 		if(position.x() > jugador.position().x()){
-			self.position().izquierda()
+		  position = izquierda.siguiente(position)   // self.position().izquierda()
 		}else{
-			self.position().derecha()
+		  position = derecha.siguiente(position)  // self.position().derecha()
 		}
 	}
 	
@@ -58,15 +77,32 @@ class Fantasma inherits Enemigo{
 	}
 	 
     method removerSe(){
-    	game.removeVisual(self)
+    	if (game.hasVisual(self)){
+			game.removeVisual(self)
+		}
     }
     
     override method tomarPuntosDeDanio(poderGolpe){
     	vida -= 1
-    	// poner sonido
-    	const x = (coordenadas.x().anyOne()).truncate(0) 
-		const y = (coordenadas.y().anyOne()).truncate(0) 
-	    position = game.at(x,y)	  
+    	if(not self.estaMuerto()){
+    	  // poner sonido
+    	  const x = (coordenadas.x().anyOne()).truncate(0) 
+		  const y = (coordenadas.y().anyOne()).truncate(0) 
+	      position = game.at(x,y)
+    	}else{
+    		self.removerSe()
+    	}
+    		  
     }
+    
+  override  method daniar(objeto){
+		objeto.recibirDanio(20)
+	}
+	
+  method aparecer(){
+		if (not game.hasVisual(self)){
+			game.addVisual(self)}
+	}	 	 
+    
 	
 }

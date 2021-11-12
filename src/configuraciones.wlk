@@ -111,10 +111,9 @@ object gameOver{
 
 class ObjetoEnPantalla {
 	
-	method tomarPuntosDeDanio(poderGolpe){
+	method tomarPuntosDeDanio(poderGolpe){}
+	method daniar(objeto){} 
 		
-	}
-	
 }
 
 class Enemigo inherits ObjetoEnPantalla { // usar Herencias 
@@ -122,7 +121,7 @@ class Enemigo inherits ObjetoEnPantalla { // usar Herencias
 	method estaMuerto()
 	method seMueve()
 	method seDetiene()
-	 
+	
 	
 }
 

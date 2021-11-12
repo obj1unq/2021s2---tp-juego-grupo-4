@@ -23,7 +23,7 @@ class  Shuriken inherits ObjetoEnPantalla{
 			game.addVisual(self)}
 	}
 	
-	method daniar(objeto){
+	override method daniar(objeto){
 		objeto.recibirDanio(10)
 		self.desaparecer()
 	}	

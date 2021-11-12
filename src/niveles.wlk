@@ -40,8 +40,8 @@ object nivel1 inherits Nivel {
 	game.showAttributes(jugador)
 		
 	self.agregarEventos()
-//sacar ese if para meter el polimorfismo elemento => elemento.daniar(jugador)
-	game.onCollideDo(jugador, {elemento => if (ninja.esUnShuriken(elemento)){elemento.daniar(jugador)}})
+
+	game.onCollideDo(jugador, {elemento => elemento.daniar(jugador)})
 	
 	}
 	
@@ -51,7 +51,7 @@ object nivel1 inherits Nivel {
 			game.onTick(6000,"lanzarShurikens",{ninja.lanzarShurikens()})	
 			game.onTick(500,"movimientoShurikens",{ ninja.desplazarShurikens()})
 		
-			game.onTick(500,"ganarEnergiaJugador",{ jugador.ganarEnergia(1)})
+			game.onTick(1000,"ganarEnergiaJugador",{ jugador.ganarEnergia(1)})
 	}
 	
 	override method removerEventos(){  
@@ -69,12 +69,20 @@ object nivel1 inherits Nivel {
   object nivel2 inherits Nivel {
   	
   override method iniciar(){
+  	
+  	const fantasma1 = new Fantasma( position = game.at(0, 0) )
+    const fantasma2 = new Fantasma( position = game.at(game.width() - 1, 0) )
+    const fantasma3 = new Fantasma( position = game.at(0, game.height() - 1) )
+    const fantasma4 = new Fantasma( position = game.at(game.width() - 1, game.height() - 1))
+  	fantasmas.fantasmas(#{fantasma1,fantasma2,fantasma3,fantasma4} )
+  	
   	//	game.boardGround(image)
 	game.addVisual(jugador)
 	game.addVisual(areaDeAtaque)
-	game.addVisual(fantasmas)
- 
+	game.addVisual(fantasmas)                                   
 	game.addVisual(cartel)
+		
+	fantasmas.aparecerFantasmas()	
 		
 	config.configurarTeclas()
 	game.showAttributes(jugador)
@@ -83,9 +91,15 @@ object nivel1 inherits Nivel {
   }
   
   
-	override method agregarEventos(){}
+	override method agregarEventos(){
+		game.onTick(1000,"movimientoFantasmas",{fantasmas.moverFantasmas()})
+		game.onTick(1000,"ganarEnergiaJugador",{ jugador.ganarEnergia(1)})
+	}
 	
-	override method removerEventos(){}
+	override method removerEventos(){
+		game.removeTickEvent("movimientoFantasmas")
+		game.removeTickEvent("ganarEnergiaJugador")
+	}
 	
 	override method nivelGanado(){
 		return fantasmas.estanVencidos()
