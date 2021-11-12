@@ -42,7 +42,7 @@ class Fantasma inherits Enemigo{
 	
 	override method seMueve(){
 	   if(self.estaEnLaMismaFilaQueELJugador() ){
-	   	  self.acercarseHaciaElJugador()  // self.position().arriba()
+	   	  self.acercarseHaciaElJugador()  
 	   }else{
 	   	 self.coordinarEjeX()
 	   }	
@@ -52,17 +52,17 @@ class Fantasma inherits Enemigo{
 	
 	method acercarseHaciaElJugador(){
 		if(position.y() > jugador.position().y()){
-		   position = abajo.siguiente(position)
+		    self.moverHacia(abajo)   
 		}else{
-		   position = arriba.siguiente(position)
+		    self.moverHacia(arriba)   
 		}
 	}
 	
 	method coordinarEjeX(){
 		if(position.x() > jugador.position().x()){
-		  position = izquierda.siguiente(position)   // self.position().izquierda()
+		   self.moverHacia(izquierda)  
 		}else{
-		  position = derecha.siguiente(position)  // self.position().derecha()
+		   self.moverHacia(derecha)  
 		}
 	}
 	
@@ -85,12 +85,12 @@ class Fantasma inherits Enemigo{
     override method tomarPuntosDeDanio(poderGolpe){
     	vida -= 1
     	if(not self.estaMuerto()){
-    	  // poner sonido
-    	  const x = (coordenadas.x().anyOne()).truncate(0) 
-		  const y = (coordenadas.y().anyOne()).truncate(0) 
-	      position = game.at(x,y)
+    	   // poner sonido
+    	   const x = (coordenadas.x().anyOne()).truncate(0) 
+		   const y = (coordenadas.y().anyOne()).truncate(0) 
+	       position = game.at(x,y)
     	}else{
-    		self.removerSe()
+    	   self.removerSe()
     	}
     		  
     }
@@ -104,5 +104,10 @@ class Fantasma inherits Enemigo{
 			game.addVisual(self)}
 	}	 	 
     
-	
+	method moverHacia(dir){
+		//if(not self.hayFantasmaEn(dir)){}
+			position = dir.siguiente(position)  
+		}	 
+
+
 }
