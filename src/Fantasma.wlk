@@ -105,7 +105,7 @@ class Fantasma inherits Enemigo{
 	}	 	 
     
 	method moverHacia(dir){
-		//if(not self.hayFantasmaEn(dir)){}  hacer 
+		//if(not self.hayFantasmaEn(dir)){} falta hacer 
 			position = dir.siguiente(position)  
 		}	 
 
