@@ -16,7 +16,18 @@ class Nivel {  // => hacer herencia para todos los niveles
 	method agregarEventos()
 	method removerEventos()
 	method nivelGanado()
+	method pasarAlsiguienteNivel()
+	
+	method terminarNivelSiCorresponde(){
+		if(self.nivelGanado()){
+		   self.pasarAlsiguienteNivel()	
+		}
+	}
+	
+	
+		
 }
+
 
 
 //+--------------------------------------------------------------------------------------------------+
@@ -58,6 +69,17 @@ object nivel1 inherits Nivel {
 		game.removeTickEvent("movimientoNinja")
 		game.removeTickEvent("lanzarShurikens")
 		game.removeTickEvent("movimientoShurikens")
+	}
+	
+	override method pasarAlsiguienteNivel(){
+		ninja.seDetiene()
+		game.removeVisual(ninja)
+	 	game.say(jugador, "El ninja fue vencido")
+	 	game.clear()
+	 	
+	 	game.schedule(1500, { nivel2.iniciar() })
+	 	
+	
 	}
 		
 }
@@ -105,6 +127,12 @@ object nivel1 inherits Nivel {
 	
 	override method nivelGanado(){
 		return fantasmas.estanVencidos()
+	}
+	
+	override method pasarAlsiguienteNivel(){
+	 	game.say(jugador, "los fantasmas fueron vencidos")
+   		cartel.text("presione ENTER para pasar al siguiente nivel")
+   		keyboard.enter().onPressDo({nivel1.iniciar()})
 	}
   	
   }

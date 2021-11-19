@@ -31,7 +31,9 @@ object  fantasmas {
    
    method aparecerFantasmas(){
    	 fantasmas.forEach({fantasma => fantasma.aparecer()})
-   } 
+   }
+   
+   method daniar(cantidad){} 
     
 }
 
@@ -68,7 +70,7 @@ class Fantasma inherits Enemigo{
 	}
 	
 	override method estaMuerto(){
-		return vida == 0
+		return vida <= 0
 	}
 	
 	override method seDetiene(){
@@ -91,7 +93,7 @@ class Fantasma inherits Enemigo{
 		   const y = (coordenadas.y().anyOne()).truncate(0) 
 	       position = game.at(x,y)
     	}else{
-    	   self.removerSe()
+    	   self.seDetiene()
     	}
     		  
     }
@@ -100,15 +102,28 @@ class Fantasma inherits Enemigo{
 		objeto.recibirDanio(20)
 	}
 	
+	 method recibirDanio(cant){}
+	
   method aparecer(){
 		if (not game.hasVisual(self)){
 			game.addVisual(self)}
 	}	 	 
-    
+ 
+     
 	method moverHacia(dir){
-		//if(not self.hayFantasmaEn(dir)){} falta hacer 
+		if(self.celdaValidaParaMover(dir)){}
 			position = dir.siguiente(position)  
-		}	 
+		}
+		
+//ver		
+	method 	celdaValidaParaMover(dir){
+		return   game.getObjectsIn(dir.siguiente(position)).isEmpty() or self.esLaCasillaDelJugador(dir.siguiente(position))    
+	}
+//ver	
+	method esLaCasillaDelJugador(celda){
+		return jugador.position() == celda
+	}
+			 
 
 
 }

@@ -36,7 +36,6 @@ object jugador inherits ObjetoEnPantalla{
 		if (coordenadas.posicionValida(nuevaPosicion)){
        	  position = nuevaPosicion
         }else{
-//lanzar error en lugar de game.say
           game.say(self,"Hay una pared bloqueando mi paso")	// Eliminar desp  // Tirar exepcion ??
         }
 	
@@ -91,21 +90,15 @@ object jugador inherits ObjetoEnPantalla{
 	method desplazarseA(dir){
 		position = dir
 	}
-/*
-	method atacar(){
-		const dirrecionesAAtacar = #{izquierda,diagonalIzq,arriba,diagonalDer,derecha}
-   		game.sound("sword-sound-2.mp3").play()  // sonidito de espada 
-   		dirrecionesAAtacar.forEach({ dir => self.atacarHacia(dir) })	 	
-	}
-*/
 
 	method atacarHacia(dir){
  		self.desplazarseA(dir.siguiente(jugador.position())) 
-    	self.hacerAtaque()   
+    	self.hacerAtaque() 
+    			  
    }
 	
  	method hacerAtaque(){
- 		game.whenCollideDo(self, { elemento => elemento.tomarPuntosDeDanio(poderGolpe)}) 																		
+ 		game.whenCollideDo(self, { elemento => elemento.tomarPuntosDeDanio(poderGolpe)})										
   	}
 }
 

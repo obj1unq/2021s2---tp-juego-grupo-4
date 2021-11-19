@@ -46,18 +46,18 @@ object ninja inherits Enemigo{
  	method removerShurikens(){
  		shurikens.forEach{shuriken => shuriken.desaparecer()}
  	}
-	
-//se podrá llamar recibirDanio(cant)? 		
+		
 	override method tomarPuntosDeDanio(cant){
 		vida -= cant
-		if(self.estaMuerto()){
+		nivel1.terminarNivelSiCorresponde()
+		
+	/*  if(self.estaMuerto()){
 			self.seDetiene()
 			game.removeVisual(self)
- 	        gameOver.iniciar() 
-		} 	
+			nivel1.pasarAlsiguienteNivel() 
+		} */ 	
 	}
-	
-	
+
 }
 	
 
