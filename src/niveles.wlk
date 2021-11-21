@@ -77,7 +77,7 @@ object nivel1 inherits Nivel {
 	 	game.say(jugador, "El ninja fue vencido")
 	 	game.clear()
 	 	
-	 	game.schedule(1500, { nivel2.iniciar() })
+	 	game.schedule(1000, { nivel2.iniciar() })
 	 	
 	
 	}
@@ -97,6 +97,7 @@ object nivel1 inherits Nivel {
     const fantasma3 = new Fantasma( position = game.at(0, game.height() - 1) )
     const fantasma4 = new Fantasma( position = game.at(game.width() - 1, game.height() - 1))
   	fantasmas.fantasmas(#{fantasma1,fantasma2,fantasma3,fantasma4} )
+  	fantasmas.fantasmasRestantes(4)
   	
   	//	game.boardGround(image)
 	game.addVisual(jugador)
@@ -105,6 +106,7 @@ object nivel1 inherits Nivel {
 	game.addVisual(cartel)
 		
 	fantasmas.aparecerFantasmas()	
+	game.showAttributes(fantasmas)
 		
 	config.configurarTeclas()
 	game.showAttributes(jugador)
@@ -130,9 +132,11 @@ object nivel1 inherits Nivel {
 	}
 	
 	override method pasarAlsiguienteNivel(){
+		self.removerEventos()
 	 	game.say(jugador, "los fantasmas fueron vencidos")
-   		cartel.text("presione ENTER para pasar al siguiente nivel")
-   		keyboard.enter().onPressDo({nivel1.iniciar()})
+	 	game.clear()
+	 	
+	 	game.schedule(1000, { nivel1.iniciar() })
 	}
   	
   }

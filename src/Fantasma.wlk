@@ -7,6 +7,7 @@ import jugador.*
 object  fantasmas {
 	var property fantasmas  // =  #{fantasma1,fantasma2,fantasma3,fantasma4} 
 	const property position = game.center() // ver 
+	var property fantasmasRestantes   
 /*	
 	const fantasma1 = new Fantasma( position = game.at(0, 0) )
     const fantasma2 = new Fantasma( position = game.at(game.width() - 1, 0) )
@@ -14,7 +15,7 @@ object  fantasmas {
     const fantasma4 = new Fantasma( position = game.at(game.width() - 1, game.height() - 1))
 */  
     method estanVencidos(){
-    	return fantasmas.size() == 0 
+    	return fantasmasRestantes == 0 
     }
     
      method tomarPuntosDeDanio(poderGolpe){
@@ -34,6 +35,10 @@ object  fantasmas {
    }
    
    method daniar(cantidad){} 
+   
+   method fantasmaEsLiberado(){
+   	 fantasmasRestantes -=   1 
+   }
     
 }
 
@@ -41,7 +46,7 @@ object  fantasmas {
 class Fantasma inherits Enemigo{
 	var property vida = 4  
 	var property position = game.at(-1,-1)
-	method image() = "Fantasma .png" //"Fantasma.png"  // imagen temp
+	method image() = "Fantasma .png" // imagen temp
 	
 	override method seMueve(){
 	   if(self.estaEnLaMismaFilaQueELJugador() ){
@@ -70,13 +75,13 @@ class Fantasma inherits Enemigo{
 	}
 	
 	override method estaMuerto(){
-		return vida <= 0
+		return vida == 0
 	}
 	
 	override method seDetiene(){
 		game.say(self,"Ya puedo descansar en Paz")  //sacar mensaje
 		self.removerSe()
-		//nivel2.removerEventos()
+		
 	}
 	 
     method removerSe(){
@@ -93,7 +98,9 @@ class Fantasma inherits Enemigo{
 		   const y = (coordenadas.y().anyOne()).truncate(0) 
 	       position = game.at(x,y)
     	}else{
-    	   self.seDetiene()
+    	  fantasmas.fantasmaEsLiberado() 
+    	  self.seDetiene()
+    	  nivel2.terminarNivelSiCorresponde()
     	}
     		  
     }
