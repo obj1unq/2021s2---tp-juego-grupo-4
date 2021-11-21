@@ -16,7 +16,7 @@ object ninja inherits Enemigo{
     const property shurikens =[shuriken1,shuriken2,shuriken3] 
 
 	
-	method image(){ return "ninja.png"}
+	method image(){ return "ninja2.png"}
 	override method estaMuerto(){ return vida <= 0}	
 	
 	method esUnShuriken(elemento){return shurikens.contains(elemento)}

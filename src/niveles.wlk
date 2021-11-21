@@ -40,7 +40,7 @@ object nivel1 inherits Nivel {
 	}
 	
 	override method iniciar(){
-//	game.boardGround(image)
+	game.boardGround("Dojo.jpg")
 	game.addVisual(jugador)
 	game.addVisual(ninja)
  	game.addVisual(areaDeAtaque)
@@ -99,7 +99,7 @@ object nivel1 inherits Nivel {
   	fantasmas.fantasmas(#{fantasma1,fantasma2,fantasma3,fantasma4} )
   	fantasmas.fantasmasRestantes(4)
   	
-  	//	game.boardGround(image)
+  	game.boardGround("Cementerio.jpg")
 	game.addVisual(jugador)
 	game.addVisual(areaDeAtaque)
 	game.addVisual(fantasmas)                                   

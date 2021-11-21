@@ -8,7 +8,7 @@ program juego {
 	game.height(7)
 	game.width(7)
 	
-	nivel2.iniciar() /// esta iniciado el nivel 2 (fantasmas)
+	nivel1.iniciar() /// esta iniciado el nivel 2 (fantasmas)
 
 	game.start()
 	
