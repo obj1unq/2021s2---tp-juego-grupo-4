@@ -1,6 +1,7 @@
 import wollok.game.*
 import configuraciones.*
 import jugador.*
+import Fantasma.*
 
 //modificar el nombre del test
 describe "Tests de Juego" {
@@ -59,6 +60,25 @@ test "Movimiento invalido" {
     jugador.mover(izquierda)
     posicionAVer = game.at(-1,0)
     assert.notEquals(posicionAVer,jugador.position())
-    }		
+    }
+
+//+--------------------------------------------------------------------------------------------------+
+//|                                 AREA DE ATAQUE                                                   |
+//+--------------------------------------------------------------------------------------------------+  
+
+test "fantasmasRestantes"{
+	const fantasma4 = new Fantasma( position = game.at(game.width() - 1, game.height() - 1))
+  	fantasmas.fantasmasRestantes(1)
+  	assert.equals(1,fantasmas.fantasmasRestantes())
+      
+  	
+  	 fantasma4.tomarPuntosDeDanio(2) // sigue vivo
+  	 fantasma4.tomarPuntosDeDanio(2) // sigue vivo
+  	 fantasma4.tomarPuntosDeDanio(2) // sigue vivo
+  	 assert.equals(1,fantasmas.fantasmasRestantes())
+  	
+  	 fantasmas.fantasmaEsLiberado()
+  	 assert.equals(0,fantasmas.fantasmasRestantes()) 
+  }     		
 
 }
