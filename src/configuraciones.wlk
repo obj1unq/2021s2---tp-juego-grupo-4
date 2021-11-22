@@ -35,18 +35,22 @@ object config {
 
 object izquierda {
    method siguiente(posicion) {return posicion.left(1)}
+    method sufijo() {return "izquierda"}
 }
 
 object derecha {
 	method siguiente(posicion) {return posicion.right(1)}
+	method sufijo() {return "derecha"}
 }
 
 object arriba {
 	method siguiente(posicion) {return posicion.up(1)}
+	method sufijo() {return "arriba"}
 }
 
 object abajo {
 	method siguiente(posicion) {return posicion.down(1)}
+	method sufijo() {return "abajo"}
 }
 
 

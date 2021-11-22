@@ -15,20 +15,20 @@ object jugador inherits ObjetoEnPantalla{
 	var   property  position      = game.at(3,1)
 	const property  poder         = 20 // daño del jugador
 	var   property  energia        =  4
+	var dirrecion = arriba
 
 
 	method estaMuerto(){ return vida <= 0}
-		
+	
+	method image() = "heroe(" + self.sufijo() + ").png"	
 
-	method image() = if(self.estaMuerto()){   
-     "caballero con espada muerto.jpg"
-      }else{
-      "heroe(arriba).png"
-      }
+	method sufijo() = if(self.estaMuerto()){"muerto"}
+                      else{dirrecion.sufijo()}
 
 		
 	method mover(_direccion) {
 		self.validarMovimiento()
+		dirrecion = _direccion
 		self.irASiPuede(_direccion.siguiente(position))
 	 }
 
