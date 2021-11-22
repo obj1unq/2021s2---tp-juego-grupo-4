@@ -41,6 +41,7 @@ object nivel1 inherits Nivel {
 	
 	override method iniciar(){
 	game.boardGround("Dojo.jpg")
+	
 	game.addVisual(jugador)
 	game.addVisual(ninja)
  	game.addVisual(areaDeAtaque)
@@ -49,6 +50,7 @@ object nivel1 inherits Nivel {
 	
 	config.configurarTeclas()
 	game.showAttributes(jugador)
+		
 		
 	self.agregarEventos()
 
@@ -76,8 +78,9 @@ object nivel1 inherits Nivel {
 		game.removeVisual(ninja)
 	 	game.say(jugador, "El ninja fue vencido")
 	 	game.clear()
+       
 	 	
-	 	game.schedule(1000, { nivel2.iniciar() })
+	   game.schedule(1000, { nivel2.iniciar() })
 	 	
 	
 	}

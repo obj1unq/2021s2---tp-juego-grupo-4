@@ -23,7 +23,7 @@ object jugador inherits ObjetoEnPantalla{
 	method image() = if(self.estaMuerto()){   
      "caballero con espada muerto.jpg"
       }else{
-      "caballero  con espada.png"
+      "heroe(arriba).png"
       }
 
 		

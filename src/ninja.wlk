@@ -17,7 +17,7 @@ object ninja inherits Enemigo{
 
 	
 	method image(){ return "ninja2.png"}
-	override method estaMuerto(){ return vida <= 0}	
+	override method estaMuerto(){ return vida == 0}	
 	
 	method esUnShuriken(elemento){return shurikens.contains(elemento)}
 			
@@ -48,14 +48,9 @@ object ninja inherits Enemigo{
  	}
 		
 	override method tomarPuntosDeDanio(cant){
-		vida -= cant
+		vida = 0.max(vida - cant)
 		nivel1.terminarNivelSiCorresponde()
 		
-	/*  if(self.estaMuerto()){
-			self.seDetiene()
-			game.removeVisual(self)
-			nivel1.pasarAlsiguienteNivel() 
-		} */ 	
 	}
 
 }
