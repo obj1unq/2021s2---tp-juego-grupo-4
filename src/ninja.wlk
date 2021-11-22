@@ -7,6 +7,7 @@ import niveles.*
 
 object ninja inherits Enemigo{
 	var  property  vida     = 100
+	var  property  golpesRecibidos = 0     
     var  property  position = game.center()
     
     const shuriken1 = new Shuriken( direccion = izquierda)
@@ -48,9 +49,10 @@ object ninja inherits Enemigo{
  	}
 		
 	override method tomarPuntosDeDanio(cant){
+		golpesRecibidos =  golpesRecibidos + 1
 		vida = 0.max(vida - cant)
+		game.say(self,"Vida Ninja: " + vida + " golpesRecibidos:"+ golpesRecibidos)
 		nivel1.terminarNivelSiCorresponde()
-		
 	}
 
 }

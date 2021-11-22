@@ -50,7 +50,8 @@ object jugador inherits ObjetoEnPantalla{
 
 	method recibirDanio(cant){ // Nombre temp
  		vida -= cant
-//		game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
+ 		game.say(self,"Vida: " + vida )
+		game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
  		if(self.estaMuerto()){
 			gameOver.iniciar()
  		}
@@ -82,10 +83,10 @@ object jugador inherits ObjetoEnPantalla{
 //+--------------------------------------------------------------------------------------------------+
 
  object areaDeAtaque inherits ObjetoEnPantalla{
-  var property  position   = game.at(0, 0)
+  var property  position   = game.at(-1, 0)
   var property  poderGolpe = jugador.poder()
 
-  method image() = "Shuriken.png"  // solo para testear
+  method image() = "slash.png"  // solo para testear
 
 	method desplazarseA(dir){
 		position = dir
@@ -94,12 +95,23 @@ object jugador inherits ObjetoEnPantalla{
 	method atacarHacia(dir){
  		self.desplazarseA(dir.siguiente(jugador.position())) 
     	self.hacerAtaque() 
-    			  
+    	game.schedule(500, {  position = game.at(-1, 0) })		  
    }
 	
  	method hacerAtaque(){
- 		game.whenCollideDo(self, { elemento => elemento.tomarPuntosDeDanio(poderGolpe)})										
+ 	   const objetivos = game.colliders(self)
+       objetivos.forEach({objeto => objeto.tomarPuntosDeDanio(poderGolpe)})									
   	}
+  
+   
+   /*
+    method hacerAtaque(){
+ 		game.whenCollideDo(self, { 
+  			elemento => elemento.tomarPuntosDeDanio(poderGolpe)})										
+  	}
+*/
+	
+  	
 }
 
 
