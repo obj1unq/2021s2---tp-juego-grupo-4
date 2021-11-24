@@ -36,6 +36,8 @@ object  fantasmas {
    
    method daniar(cantidad){} 
    
+   method mejorar(objeto){}
+   
    method fantasmaEsLiberado(){
    	 fantasmasRestantes -=   1 
    }
