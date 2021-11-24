@@ -116,7 +116,7 @@ class ObjetoEnPantalla {
 	
 	method tomarPuntosDeDanio(poderGolpe){}
 	method daniar(objeto){} 
-		
+	method mejorar(objeto){}	
 }
 
 class Enemigo inherits ObjetoEnPantalla { // usar Herencias 

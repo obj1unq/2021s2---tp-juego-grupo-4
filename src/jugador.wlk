@@ -1,6 +1,7 @@
 import wollok.game.*
 import configuraciones.*
 import ninja.*
+import pociones.*
 
 
 
@@ -13,7 +14,7 @@ object jugador inherits ObjetoEnPantalla{
 		
     var   property  vida          = 100
 	var   property  position      = game.at(3,1)
-	const property  poder         = 20 // daño del jugador
+	var   property  poder         = 20 // daño del jugador
 	var   property  energia        =  4
 	var dirrecion = arriba
 
@@ -75,6 +76,33 @@ object jugador inherits ObjetoEnPantalla{
   	}else{
   		 energia = 0.max(energia + cant)
   	} 
+  }
+  
+  method ganarVida(cant){ //igual que el de arriba pero 100 es el max
+  	if(vida + cant >= 100){
+  		 vida = 100 
+  	}else{
+  		 vida = 0.max(vida + cant)
+  	} 
+  }
+  
+  method ganarPoder(cant){ 
+  	poder = poder + cant
+  }
+  
+  method AumentarVidaYDesaparecer(pocion){
+  		self.ganarVida(pocion.cantidadDeAumento())
+  		generadorDePociones.remover(pocion)
+  }
+  
+  method AumentarEnergiaYDesaparecer(pocion){
+  		self.ganarEnergia(pocion.cantidadDeAumento())
+  		generadorDePociones.remover(pocion)
+  }
+  
+  method AumentarAtaqueYDesaparecer(pocion){
+  		self.ganarPoder(pocion.cantidadDeAumento())
+  		generadorDePociones.remover(pocion)
   }
   
 }

@@ -4,6 +4,8 @@ import jugador.*
 import ninja.*
 import shuriken.*
 import Fantasma.*
+import pociones.*
+
 
 
 //+--------------------------------------------------------------------------------------------------+
@@ -55,6 +57,7 @@ object nivel1 inherits Nivel {
 	self.agregarEventos()
 
 	game.onCollideDo(jugador, {elemento => elemento.daniar(jugador)})
+	game.onCollideDo(jugador, {pocion => pocion.mejorar(jugador)})
 	
 	}
 	
@@ -65,12 +68,15 @@ object nivel1 inherits Nivel {
 			game.onTick(500,"movimientoShurikens",{ ninja.desplazarShurikens()})
 		
 			game.onTick(1000,"ganarEnergiaJugador",{ jugador.ganarEnergia(1)})
+			game.onTick(5000,"pociones",{ generadorDePociones.agregarPocion()})
+
 	}
 	
 	override method removerEventos(){  
 		game.removeTickEvent("movimientoNinja")
 		game.removeTickEvent("lanzarShurikens")
 		game.removeTickEvent("movimientoShurikens")
+		game.removeTickEvent("pociones")
 	}
 	
 	override method pasarAlsiguienteNivel(){
@@ -116,6 +122,7 @@ object nivel1 inherits Nivel {
 		
 	self.agregarEventos()
 	game.onCollideDo(jugador, {elemento => elemento.daniar(jugador)})
+	game.onCollideDo(jugador, {pocion => pocion.mejorar(jugador)})
 	
   }
   
@@ -123,11 +130,13 @@ object nivel1 inherits Nivel {
 	override method agregarEventos(){
 		game.onTick(1000,"movimientoFantasmas",{fantasmas.moverFantasmas()})
 		game.onTick(1000,"ganarEnergiaJugador",{ jugador.ganarEnergia(1)})
+		game.onTick(10000,"pociones",{ generadorDePociones.agregarPocion()})
 	}
 	
 	override method removerEventos(){
 		game.removeTickEvent("movimientoFantasmas")
 		game.removeTickEvent("ganarEnergiaJugador")
+		game.removeTickEvent("pociones")
 	}
 	
 	override method nivelGanado(){
