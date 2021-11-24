@@ -93,6 +93,7 @@ object jugador inherits ObjetoEnPantalla{
   method AumentarVidaYDesaparecer(pocion){
   		self.ganarVida(pocion.cantidadDeAumento())
   		generadorDePociones.remover(pocion)
+  		game.say(self,"Vida: " + vida )
   }
   
   method AumentarEnergiaYDesaparecer(pocion){
