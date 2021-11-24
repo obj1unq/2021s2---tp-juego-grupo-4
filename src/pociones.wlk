@@ -50,11 +50,29 @@ class Ataque inherits Pocion{
 	}
 }
 
+object vidaFactory{
+	method nuevaPocion(){
+		return new Vida(position = randomizer.position())
+	}
+}
+
+object energiaFactory{
+	method nuevaPocion(){
+		return new Energia(position = randomizer.position())
+	}
+}
+
+object poderFactory{
+	method nuevaPocion(){
+		return new Ataque(position = randomizer.position())
+	}
+}
 
 object generadorDePociones{
 	
 	var pociones = #{}
 	const max = 4
+	const factories= [vidaFactory, energiaFactory, poderFactory]
 	
 	method agregarPocion(){
 		if (self.faltanPociones()){
@@ -76,17 +94,8 @@ object generadorDePociones{
 	}
 	
 	method generarPocion(){
-		if((0..2).anyOne() ==  0 ){
-			return new Vida(position = randomizer.position())
-		}
-		if((0..2).anyOne() ==  1 ){
-			return new Energia(position = randomizer.position())
-		}
-		else{
-			return new Ataque(position = randomizer.position())
-		}
-		
-		
-		
+		const factory = factories.get((0..2).anyOne())
+		return factory.nuevaPocion()
+	
 	}
 }
