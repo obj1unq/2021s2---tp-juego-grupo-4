@@ -13,7 +13,7 @@ class Pocion inherits ObjetoEnPantalla {
 	const property cantidadDeAumento = 3
 	
 	method caracteristica()
-	method mejorar(jugador)
+	
 
 	method image() = "pocion_" + self.caracteristica() + ".png"
 	

@@ -26,7 +26,7 @@ class Nivel {  // => hacer herencia para todos los niveles
 		}
 	}
 	
-	
+	method fondoDelNivel()
 		
 }
 
@@ -42,7 +42,8 @@ object nivel1 inherits Nivel {
 	}
 	
 	override method iniciar(){
-	game.boardGround("Dojo.jpg")
+	game.addVisual(telon)  //game.boardGround("Dojo.jpg")
+	telon.fondo(self.fondoDelNivel())
 	
 	game.addVisual(jugador)
 	game.addVisual(ninja)
@@ -90,6 +91,8 @@ object nivel1 inherits Nivel {
 	 	
 	
 	}
+	
+	override method fondoDelNivel(){ return "Dojo.jpg"}
 		
 }
 
@@ -108,7 +111,12 @@ object nivel1 inherits Nivel {
   	fantasmas.fantasmas(#{fantasma1,fantasma2,fantasma3,fantasma4} )
   	fantasmas.fantasmasRestantes(4)
   	
-  	game.boardGround("Cementerio.jpg")
+  	
+  	
+  	game.addVisual(telon)   //game.boardGround("Cementerio.jpg")
+	telon.fondo(self.fondoDelNivel())
+  	
+  	
 	game.addVisual(jugador)
 	game.addVisual(areaDeAtaque)
 	game.addVisual(fantasmas)                                   
@@ -150,6 +158,8 @@ object nivel1 inherits Nivel {
 	 	
 	 	game.schedule(1000, { nivel1.iniciar() })
 	}
+	
+	override method fondoDelNivel(){ return "Cementerio.jpg"}
   	
   }
 
