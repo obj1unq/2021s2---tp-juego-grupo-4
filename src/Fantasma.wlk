@@ -48,7 +48,7 @@ object  fantasmas {
 class Fantasma inherits Enemigo{
 	var property vida = 4  
 	var property position = game.at(-1,-1)
-	method image() = "Fantasma2.png" // imagen temp
+	method image() = "Fantasma2.png" 
 	
 	override method seMueve(){
 	   if(self.estaEnLaMismaFilaQueELJugador() ){

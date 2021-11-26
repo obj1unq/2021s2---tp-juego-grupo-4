@@ -5,6 +5,7 @@ import ninja.*
 import shuriken.*
 import Fantasma.*
 import pociones.*
+import mago.*
 
 
 
@@ -156,16 +157,78 @@ object nivel1 inherits Nivel {
 	 	game.say(jugador, "los fantasmas fueron vencidos")
 	 	game.clear()
 	 	
-	 	game.schedule(1000, { nivel1.iniciar() })
+	 	game.schedule(1000, { nivel3.iniciar() })
 	}
 	
 	override method fondoDelNivel(){ return "Cementerio.jpg"}
   	
   }
 
-
+//+--------------------------------------------------------------------------------------------------+
+//|                                 NIVEL 3                                                          |
+//+--------------------------------------------------------------------------------------------------+
   
-	 
+  object nivel3 inherits Nivel{
+  	
+  	override method nivelGanado(){
+		return mago.estaMuerto()
+	}
+	
+	override method iniciar(){
+	game.addVisual(telon) 
+	telon.fondo(self.fondoDelNivel())
+	
+	game.addVisual(jugador)
+	game.addVisual(mago)
+ 	game.addVisual(areaDeAtaque)
+	game.addVisual(cartel)
+	
+	
+	game.showAttributes(mago) //
+	
+	config.configurarTeclas()
+	game.showAttributes(jugador)
+			
+	self.agregarEventos()
+
+	game.onCollideDo(jugador, {elemento => elemento.daniar(jugador)})
+	game.onCollideDo(jugador, {pocion => pocion.mejorar(jugador)})
+	
+	}
+	
+	override method fondoDelNivel(){return "Runas.jpg"}
+  	
+  	override method agregarEventos(){
+  		
+
+		
+		game.onTick(150,"movimientolanzarBolasDeFuego",{ mago.desplazarBolasDeFuego()})
+  		
+  		
+		game.onTick(300,"magoAcciones",{mago.actuar()})
+		game.onTick(1000,"ganarEnergiaJugador",{ jugador.ganarEnergia(1)})
+		game.onTick(10000,"pociones",{ generadorDePociones.agregarPocion()})
+	}
+  	
+  	override method removerEventos(){
+		game.removeTickEvent("magoAcciones")
+		game.removeTickEvent("ganarEnergiaJugador")
+		game.removeTickEvent("pociones")
+		game.removeTickEvent("lanzarBolasDeFuego")
+		game.removeTickEvent("movimientolanzarBolasDeFuego")
+	}
+  	
+  	override method pasarAlsiguienteNivel(){
+		self.removerEventos()
+	 	game.clear()
+	 	game.schedule(1000, { nivel1.iniciar() })
+	}
+  	
+  	
+  }
+  
+  
+   
 
 
 
