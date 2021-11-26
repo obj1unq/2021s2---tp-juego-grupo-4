@@ -101,7 +101,7 @@ class BolaDeFuego inherits ObjetoEnPantalla{
 	method image() = "BolaDeFuego.png" 
 	
 	method aparecer(){
-		game.sound("BolaDeFuego.mp3").play()  // sonidito de grito  
+		game.sound("BolaDeFuego.mp3").play()  // sonidito de bola de fuego  
 		position =  abajo.siguiente(mago.position())
 		if (not game.hasVisual(self)){
 			game.addVisual(self)}
