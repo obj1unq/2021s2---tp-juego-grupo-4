@@ -214,13 +214,14 @@ object nivel1 inherits Nivel {
 		game.removeTickEvent("magoAcciones")
 		game.removeTickEvent("ganarEnergiaJugador")
 		game.removeTickEvent("pociones")
-		game.removeTickEvent("lanzarBolasDeFuego")
 		game.removeTickEvent("movimientolanzarBolasDeFuego")
 	}
   	
   	override method pasarAlsiguienteNivel(){
-		self.removerEventos()
+	 	mago.seDetiene()
+    	game.removeVisual(mago)
 	 	game.clear()
+	 	
 	 	game.schedule(1000, { nivel1.iniciar() })
 	}
   	

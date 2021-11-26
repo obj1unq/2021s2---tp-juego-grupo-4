@@ -15,23 +15,21 @@ object mago inherits Enemigo{
 	
 	override method seDetiene(){
 		game.say(self,"he sido derrotado")  //sacar mensaje
-		
+		self.removerBolasDeFuego()
 		nivel3.removerEventos()
 	}
 	
 	override method estaMuerto(){
-		return vida <= 0
+		return vida == 0
 	}
 	
 	override method tomarPuntosDeDanio(poderGolpe){
-    	vida -= poderGolpe
-    	game.say(self,"Vida Ninja: " + vida)
+    	vida = 0.max(vida - poderGolpe)
+    	game.say(self,"Vida Mago: " + vida)
     	if(not self.estaMuerto()){
     	   // poner sonido
 	       jugador.position(game.at(jugador.position().x(),0) )  
     	}else{ 
-    	  self.seDetiene()
-    	  game.removeVisual(self)
     	  nivel3.terminarNivelSiCorresponde()
     	}		  
     }
