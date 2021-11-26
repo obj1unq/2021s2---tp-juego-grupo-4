@@ -52,7 +52,7 @@ object jugador inherits ObjetoEnPantalla{
 	method recibirDanio(cant){ // Nombre temp
  		vida -= cant
  		game.say(self,"Vida: " + vida )
-		game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
+		//game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
  		if(self.estaMuerto()){
 			gameOver.iniciar()
  		}

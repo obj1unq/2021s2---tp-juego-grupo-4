@@ -20,6 +20,7 @@ class Pocion inherits ObjetoEnPantalla {
 		game.sound("destruir power up.mp3").play()
 	}
 
+
 	
 	
 }
