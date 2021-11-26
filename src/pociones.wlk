@@ -11,11 +11,15 @@ class Pocion inherits ObjetoEnPantalla {
 	
 	const property position 
 	const property cantidadDeAumento = 3
+	method image() = "pocion_" + self.caracteristica() + ".png"
 	
 	method caracteristica()
 	method mejorar(jugador)
+	override method tomarPuntosDeDanio(poderGolpe){
+		generadorDePociones.remover(self)
+		game.sound("destruir power up.mp3").play()
+	}
 
-	method image() = "pocion_" + self.caracteristica() + ".png"
 	
 	
 }
@@ -71,7 +75,7 @@ object poderFactory{
 object generadorDePociones{
 	
 	var pociones = #{}
-	const max = 4
+	const max = 2
 	const factories= [vidaFactory, energiaFactory, poderFactory]
 	
 	method agregarPocion(){
@@ -95,6 +99,7 @@ object generadorDePociones{
 	
 	method generarPocion(){
 		const factory = factories.get((0..2).anyOne())
+		game.sound("aparece power up.mp3").play()
 		return factory.nuevaPocion()
 	
 	}

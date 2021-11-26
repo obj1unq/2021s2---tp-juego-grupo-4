@@ -2,6 +2,7 @@ import wollok.game.*
 import configuraciones.*
 import jugador.*
 import Fantasma.*
+import pociones.*
 
 //modificar el nombre del test
 describe "Tests de Juego" {
@@ -80,5 +81,28 @@ test "fantasmasRestantes"{
   	 fantasmas.fantasmaEsLiberado()
   	 assert.equals(0,fantasmas.fantasmasRestantes()) 
   }     		
+
+
+
+//+--------------------------------------------------------------------------------------------------+
+//|                                      Pociones                                                    |
+//+--------------------------------------------------------------------------------------------------+
+
+test "pociones"{
+	jugador.energia(1)
+	const pocionEnergia =new Energia(position= game.at(0,0))
+	pocionEnergia.mejorar(jugador)
+	assert.equals(4, jugador.energia())
+	
+	jugador.vida(90)
+	const pocionVida =new Vida(position= game.at(0,0))
+	pocionVida.mejorar(jugador)
+	assert.equals(93, jugador.vida())
+	
+	jugador.poder(20)
+	const pocionPoder =new Ataque(position= game.at(0,0))
+	pocionPoder.mejorar(jugador)
+	assert.equals(23, jugador.poder())
+}
 
 }

@@ -14,7 +14,7 @@ object jugador inherits ObjetoEnPantalla{
 		
     var   property  vida          = 100
 	var   property  position      = game.at(3,1)
-	var   property  poder         = 20 // daño del jugador
+	var   property  poder 		  = 20	// daño del jugador 
 	var   property  energia        =  4
 	var dirrecion = arriba
 
@@ -87,23 +87,26 @@ object jugador inherits ObjetoEnPantalla{
   }
   
   method ganarPoder(cant){ 
-  	poder = poder + cant
+    	poder += cant
   }
   
   method AumentarVidaYDesaparecer(pocion){
   		self.ganarVida(pocion.cantidadDeAumento())
   		generadorDePociones.remover(pocion)
   		game.say(self,"Vida: " + vida )
+  		game.sound("agarrar power up.mp3").play()
   }
   
   method AumentarEnergiaYDesaparecer(pocion){
   		self.ganarEnergia(pocion.cantidadDeAumento())
   		generadorDePociones.remover(pocion)
+  		game.sound("agarrar power up.mp3").play()
   }
   
   method AumentarAtaqueYDesaparecer(pocion){
   		self.ganarPoder(pocion.cantidadDeAumento())
   		generadorDePociones.remover(pocion)
+  		game.sound("agarrar power up.mp3").play()
   }
   
 }
