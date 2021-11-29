@@ -220,7 +220,7 @@ object nivel1 inherits Nivel {
     	game.removeVisual(mago)
 	 	game.clear()
 	 	
-	 	game.schedule(1000, { nivel1.iniciar() })
+	 	game.schedule(1000, { game.stop() })
 	}
   	
   	
