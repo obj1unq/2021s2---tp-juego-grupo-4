@@ -5,15 +5,10 @@ import jugador.*
 
 
 object  fantasmas {
-	var property fantasmas  // =  #{fantasma1,fantasma2,fantasma3,fantasma4} 
-	const property position = game.center() // ver 
+	var property fantasmas  
+	const property position = game.center() 
 	var property fantasmasRestantes   
-/*	
-	const fantasma1 = new Fantasma( position = game.at(0, 0) )
-    const fantasma2 = new Fantasma( position = game.at(game.width() - 1, 0) )
-    const fantasma3 = new Fantasma( position = game.at(0, game.height() - 1) )
-    const fantasma4 = new Fantasma( position = game.at(game.width() - 1, game.height() - 1))
-*/  
+  
     method estanVencidos(){
     	return fantasmasRestantes == 0 
     }
@@ -51,7 +46,14 @@ class Fantasma inherits Enemigo{
 	method image() = "Fantasma2.png" 
 	
 	override method seMueve(){
-	   if(self.estaEnLaMismaFilaQueELJugador() ){
+		if(not jugador.estaMuerto()){
+			self.hacerMovimiento()
+		}
+	}
+	  
+	
+	method hacerMovimiento(){
+	   if(self.estaEnLaMismaFilaQueELJugador()){
 	   	  self.acercarseHaciaElJugador()  
 	   }else{
 	   	 self.coordinarEjeX()
@@ -81,7 +83,7 @@ class Fantasma inherits Enemigo{
 	}
 	
 	override method seDetiene(){
-		game.say(self,"Ya puedo descansar en Paz")  //sacar mensaje
+		game.say(self,"Ya puedo descansar en Paz")  
 		self.removerSe()
 		
 	}
@@ -95,7 +97,7 @@ class Fantasma inherits Enemigo{
     override method tomarPuntosDeDanio(poderGolpe){
     	vida -= 1
     	if(not self.estaMuerto()){
-    	   game.sound("ghost_damage.mp3").play()// poner del fantasma cuando recibe daño
+    	   game.sound("ghost_damage.mp3").play()
     	   const x = (coordenadas.x().anyOne()).truncate(0) 
 		   const y = (coordenadas.y().anyOne()).truncate(0) 
 	       position = game.at(x,y)

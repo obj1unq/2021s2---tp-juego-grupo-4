@@ -2,13 +2,6 @@ import jugador.*
 import wollok.game.*
 import ninja.*
 
-
-
-// if de ataque al jugador, eliminar todo lo que corresponde a los enemigos del jugador
-
-// crear enemigo tipo dementor que persiga al jugador que desaparezca frente a un ataque del jugador
-// y se vuelva a invocar. (ontick variable) puede aparecer mas de uno a la vez. Sacan poca vida (5)
-
 //+--------------------------------------------------------------------------------------------------+
 //|                                 TECLAS                                                           |
 //+--------------------------------------------------------------------------------------------------+
@@ -57,16 +50,6 @@ object abajo {
 	method opuesto() {return arriba}
 }
 
-
-// DIAGONALES
-object diagonalIzq {
-   method siguiente(posicion) {return posicion.left(1).up(1)}
-}
-
-object diagonalDer {
-   method siguiente(posicion) {return posicion.right(1).up(1)}
-}
-
 //COORDENADAS
 
 object coordenadas {
@@ -102,7 +85,6 @@ object cartel inherits ObjetoEnPantalla{
 //|                                 GameOver                                                         |
 //+--------------------------------------------------------------------------------------------------+
 
-//ver en donde poner el objeto gameOver()
 object gameOver{
 	
 	method iniciar(){
@@ -139,7 +121,7 @@ class ObjetoEnPantalla {
 	method mejorar(objeto){}	
 }
 
-class Enemigo inherits ObjetoEnPantalla { // usar Herencias 
+class Enemigo inherits ObjetoEnPantalla { 
 	
 	method estaMuerto()
 	method seMueve()

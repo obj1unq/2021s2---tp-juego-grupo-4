@@ -5,7 +5,7 @@ import pociones.*
 
 
 
-//opción de estamina
+
 
 //+--------------------------------------------------------------------------------------------------+
 //|                                 JUGADOR                                                          |
@@ -19,7 +19,7 @@ object jugador inherits ObjetoEnPantalla{
 	var dirrecion = arriba
 
 
-	method estaMuerto(){ return vida <= 0}
+	method estaMuerto(){ return vida == 0}
 	
 	method image() = "heroe(" + self.sufijo() + ").png"	
 
@@ -36,11 +36,8 @@ object jugador inherits ObjetoEnPantalla{
  	method irASiPuede(nuevaPosicion) {
 		if (coordenadas.posicionValida(nuevaPosicion)){
        	  position = nuevaPosicion
-        }else{
-          game.say(self,"Hay una pared bloqueando mi paso")	// Eliminar desp  // Tirar exepcion ??
-        }
-	
-	}
+ 	   }
+  }
 
 	method validarMovimiento(){
 		if(self.estaMuerto()){
@@ -49,10 +46,10 @@ object jugador inherits ObjetoEnPantalla{
 	}
 
 
-	method recibirDanio(cant){ // Nombre temp
- 		vida -= cant
+	method recibirDanio(cant){ 
+ 		vida = 0.max(vida - cant)
  		game.say(self,"Vida: " + vida )
-		//game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
+		game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
  		if(self.estaMuerto()){
 			gameOver.iniciar()
  		}
@@ -70,7 +67,7 @@ object jugador inherits ObjetoEnPantalla{
   	return energia > 0
   }	
   
-  method ganarEnergia(cant){ //suponer que 4 es el max que puede tener 
+  method ganarEnergia(cant){ //4 es el max que puede tener 
   	if(energia + cant >= 4){
   		 energia = 4 
   	}else{
@@ -92,21 +89,20 @@ object jugador inherits ObjetoEnPantalla{
   
   method AumentarVidaYDesaparecer(pocion){
   		self.ganarVida(pocion.cantidadDeAumento())
-  		generadorDePociones.remover(pocion)
   		game.say(self,"Vida: " + vida )
-  		game.sound("agarrar power up.mp3").play()
   }
   
   method AumentarEnergiaYDesaparecer(pocion){
   		self.ganarEnergia(pocion.cantidadDeAumento())
-  		generadorDePociones.remover(pocion)
-  		game.sound("agarrar power up.mp3").play()
   }
   
   method AumentarAtaqueYDesaparecer(pocion){
   		self.ganarPoder(pocion.cantidadDeAumento())
-  		generadorDePociones.remover(pocion)
-  		game.sound("agarrar power up.mp3").play()
+  		game.schedule(6500, { self.perderPoder(pocion.cantidadDeAumento()) })
+  }
+  
+  method perderPoder(cantidad){
+  	poder = 20.max(poder - cantidad)
   }
   
 }
@@ -116,9 +112,9 @@ object jugador inherits ObjetoEnPantalla{
 
  object areaDeAtaque inherits ObjetoEnPantalla{
   var property  position   = game.at(-1, 0)
-  var property  poderGolpe = jugador.poder()
 
-  method image() = "slash.png"  // solo para testear
+
+  method image() = "slash.png"  
 
 	method desplazarseA(dir){
 		position = dir
@@ -132,18 +128,12 @@ object jugador inherits ObjetoEnPantalla{
 	
  	method hacerAtaque(){
  	   const objetivos = game.colliders(self)
-       objetivos.forEach({objeto => objeto.tomarPuntosDeDanio(poderGolpe)})									
+       objetivos.forEach({objeto => objeto.tomarPuntosDeDanio(self.dano())})									
   	}
-  
-   
-   /*
-    method hacerAtaque(){
- 		game.whenCollideDo(self, { 
-  			elemento => elemento.tomarPuntosDeDanio(poderGolpe)})										
+
+  	method dano(){
+  		return jugador.poder()
   	}
-*/
-	
-  	
 }
 
 

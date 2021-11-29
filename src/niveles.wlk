@@ -53,8 +53,7 @@ object nivel1 inherits Nivel {
 	
 	
 	config.configurarTeclas()
-	game.showAttributes(jugador)
-		
+	
 		
 	self.agregarEventos()
 
@@ -67,12 +66,11 @@ object nivel1 inherits Nivel {
 	override method agregarEventos(){
 			game.onTick(2000,"movimientoNinja",{ninja.seMueve()})
 			game.onTick(6000,"lanzarShurikens",{ninja.lanzarShurikens()})	
-			game.onTick(500,"movimientoShurikens",{ ninja.desplazarShurikens()})
+			game.onTick(250,"movimientoShurikens",{ ninja.desplazarShurikens()})
 		
 			game.onTick(1000,"ganarEnergiaJugador",{ jugador.ganarEnergia(1)})
 			game.onTick(5000,"pociones",{ generadorDePociones.agregarPocion()})
-
-	}
+  }
 	
 	override method removerEventos(){  
 		game.removeTickEvent("movimientoNinja")
@@ -114,7 +112,7 @@ object nivel1 inherits Nivel {
   	
   	
   	
-  	game.addVisual(telon)   //game.boardGround("Cementerio.jpg")
+  	game.addVisual(telon)   
 	telon.fondo(self.fondoDelNivel())
   	
   	
@@ -127,7 +125,7 @@ object nivel1 inherits Nivel {
 	game.showAttributes(fantasmas)
 		
 	config.configurarTeclas()
-	game.showAttributes(jugador)
+	
 		
 	self.agregarEventos()
 	game.onCollideDo(jugador, {elemento => elemento.daniar(jugador)})
@@ -184,10 +182,10 @@ object nivel1 inherits Nivel {
 	game.addVisual(cartel)
 	
 	
-	game.showAttributes(mago) //
+
 	
 	config.configurarTeclas()
-	game.showAttributes(jugador)
+
 			
 	self.agregarEventos()
 

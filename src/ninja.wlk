@@ -3,7 +3,6 @@ import configuraciones.*
 import shuriken.*
 import niveles.*
 
-//agregar imagen de ninja muerto 
 
 object ninja inherits Enemigo{
 	var  property  vida     = 100

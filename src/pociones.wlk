@@ -1,5 +1,6 @@
 import configuraciones.*
 import randomizer.*
+import jugador.*
 import wollok.game.*
 
 //Las pociones mejoran determinados aspectos del jugador en la cantidad que diga la constante cantidad de aumento
@@ -10,17 +11,20 @@ import wollok.game.*
 class Pocion inherits ObjetoEnPantalla {
 	
 	const property position 
-	const property cantidadDeAumento = 3
+	const property cantidadDeAumento = 0
 	method image() = "pocion_" + self.caracteristica() + ".png"
 	
 	method caracteristica()
-	method mejorar(jugador)
+	 
 	override method tomarPuntosDeDanio(poderGolpe){
 		generadorDePociones.remover(self)
 		game.sound("destruir power up.mp3").play()
 	}
 
-
+  override method mejorar(objeto){
+  	generadorDePociones.remover(self)
+  	game.sound("agarrar power up.mp3").play()
+  }
 	
 	
 }
@@ -31,18 +35,25 @@ class Vida inherits Pocion{
 		return "vida"
 	}
 	
-	override method mejorar(jugador){
-		jugador.AumentarVidaYDesaparecer(self)
+	override method mejorar(objeto){
+		super(objeto)
+	    objeto.AumentarVidaYDesaparecer(self)
 	}
+	
+	override method cantidadDeAumento(){ return 20}
 }
 
 class Energia inherits Pocion{
 	override method caracteristica(){
 		return "energia"
 	}
-	override method mejorar(jugador){
-		jugador.AumentarEnergiaYDesaparecer(self)
+	
+	override method mejorar(objeto){
+		super(objeto)
+		objeto.AumentarEnergiaYDesaparecer(self)
 	}
+	
+	override method cantidadDeAumento(){ return 2}
 }
 
 
@@ -50,9 +61,12 @@ class Ataque inherits Pocion{
 	override method caracteristica(){
 		return "ataque"
 	}
-	override method mejorar(jugador){
-		jugador.AumentarAtaqueYDesaparecer(self)
+	override method mejorar(objeto){
+		super(objeto)
+		objeto.AumentarAtaqueYDesaparecer(self)
 	}
+	
+	override method cantidadDeAumento(){ return 10}
 }
 
 object vidaFactory{
