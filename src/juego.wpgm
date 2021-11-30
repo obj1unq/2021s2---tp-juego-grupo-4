@@ -7,8 +7,8 @@ program juego {
 	game.title("Juego Base")
 	game.height(7)
 	game.width(7)
-	
-	nivel3.iniciar() 
+
+	nivel1.iniciar() 
 
 	game.start()
 	

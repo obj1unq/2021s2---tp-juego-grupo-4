@@ -5,7 +5,7 @@ import jugador.*
 
 
 object  fantasmas {
-	var property fantasmas  
+	var property fantasmas = [] 
 	const property position = game.center() 
 	var property fantasmasRestantes   
   

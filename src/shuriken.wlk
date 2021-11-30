@@ -5,7 +5,7 @@ import wollok.game.*
 class  Shuriken inherits ObjetoEnPantalla{
 	
 	var property  position  = game.center()
-	var property  direccion = izquierda
+	const  direccion
 		
 	method image() = "Shuriken .png" 
 	

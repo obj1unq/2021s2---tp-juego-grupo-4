@@ -16,7 +16,7 @@ object jugador inherits ObjetoEnPantalla{
 	var   property  position      = game.at(3,1)
 	var   property  poder 		  = 20	// daño del jugador 
 	var   property  energia        =  4
-	var dirrecion = arriba
+	var dirrecion = arriba // cam 
 
 
 	method estaMuerto(){ return vida == 0}

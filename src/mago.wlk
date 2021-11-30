@@ -27,7 +27,7 @@ object mago inherits Enemigo{
     	vida = 0.max(vida - poderGolpe)
     	game.say(self,"Vida Mago: " + vida)
     	if(not self.estaMuerto()){
-    	   game.sound("Tp.mp3").play() // poner sonido
+    	   game.sound("Tp.mp3").play() 
 	       jugador.position(game.at(jugador.position().x(),0) )  
     	}else{ 
     	  nivel3.terminarNivelSiCorresponde()
