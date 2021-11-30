@@ -5,11 +5,11 @@ import jugador.*
 
 
 object mago inherits Enemigo{
-	var  property  vida     = 80
-	var  property  manaUsado = 0     
-    var  property  position = game.at(3,6)
-    var  property  dirrecionACaminar = izquierda
-	var property hechizosEnUso = []
+	var   vida      = 80
+	var   manaUsado = 0     
+    var  property  position         = game.at(3,6)
+    var  property dirrecionACaminar = izquierda
+	var  property hechizosEnUso     = []
 	
 	method image() = "mago.png" 
 	
@@ -27,7 +27,7 @@ object mago inherits Enemigo{
     	vida = 0.max(vida - poderGolpe)
     	game.say(self,"Vida Mago: " + vida)
     	if(not self.estaMuerto()){
-    	   game.sound("Tp.mp3").play() 
+    	   musica.activarSonido("Tp.mp3") 
 	       jugador.position(game.at(jugador.position().x(),0) )  
     	}else{ 
     	  nivel3.terminarNivelSiCorresponde()
@@ -99,7 +99,7 @@ class BolaDeFuego inherits ObjetoEnPantalla{
 	method image() = "BolaDeFuego.png" 
 	
 	method aparecer(){
-		game.sound("BolaDeFuego.mp3").play()  // sonidito de bola de fuego  
+		musica.activarSonido("BolaDeFuego.mp3") // sonidito de bola de fuego  
 		position =  abajo.siguiente(mago.position())
 		if (not game.hasVisual(self)){
 			game.addVisual(self)}

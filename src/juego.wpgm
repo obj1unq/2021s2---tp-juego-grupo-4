@@ -8,7 +8,7 @@ program juego {
 	game.height(7)
 	game.width(7)
 
-	nivel1.iniciar() 
+	nivel3.iniciar() 
 
 	game.start()
 	

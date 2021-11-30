@@ -15,8 +15,8 @@ object jugador inherits ObjetoEnPantalla{
     var   property  vida          = 100
 	var   property  position      = game.at(3,1)
 	var   property  poder 		  = 20	// daño del jugador 
-	var   property  energia        =  4
-	var dirrecion = arriba // cam 
+	var   property energia        =  4
+	var  direccion = arriba // cam 
 
 
 	method estaMuerto(){ return vida == 0}
@@ -24,12 +24,12 @@ object jugador inherits ObjetoEnPantalla{
 	method image() = "heroe(" + self.sufijo() + ").png"	
 
 	method sufijo() = if(self.estaMuerto()){"muerto"}
-                      else{dirrecion.sufijo()}
+                      else{direccion.sufijo()}
 
 		
 	method mover(_direccion) {
 		self.validarMovimiento()
-		dirrecion = _direccion
+		direccion = _direccion
 		self.irASiPuede(_direccion.siguiente(position))
 	 }
 
@@ -49,7 +49,7 @@ object jugador inherits ObjetoEnPantalla{
 	method recibirDanio(cant){ 
  		vida = 0.max(vida - cant)
  		game.say(self,"Vida: " + vida )
-		game.sound("damage-hit-voice-vocal.mp3").play()  // sonidito de grito  
+ 		musica.activarSonido("damage-hit-voice-vocal.mp3")  // sonidito de grito  
  		if(self.estaMuerto()){
 			gameOver.iniciar()
  		}
@@ -57,7 +57,7 @@ object jugador inherits ObjetoEnPantalla{
 
   method atacar(dir){
   	 if(self.tieneEnergia()){
-  	 	 game.sound("sword-sound-2.mp3").play()  // sonidito de espada 	
+  	 	 musica.activarSonido("sword-sound-2.mp3") // sonidito de espada 	
  	     areaDeAtaque.atacarHacia(dir)
  	     energia -= 1
  	     }

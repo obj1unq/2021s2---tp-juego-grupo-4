@@ -109,7 +109,6 @@ object telon inherits ObjetoEnPantalla{
 }
 
 
-
 //+--------------------------------------------------------------------------------------------------+
 //|                                 Herencias / Plantillas                                           |
 //+--------------------------------------------------------------------------------------------------+
@@ -126,9 +125,26 @@ class Enemigo inherits ObjetoEnPantalla {
 	method estaMuerto()
 	method seMueve()
 	method seDetiene()
-	
-	
+		
 }
 
+
+//+--------------------------------------------------------------------------------------------------+
+//|                                 Musica                                                           |
+//+--------------------------------------------------------------------------------------------------+
+ 
+  object musica{
+	var estaActivada = true 
+ 	
+   method activarSonido(sonido){
+   	 if(estaActivada){
+   	 	game.sound(sonido).play()
+   	 }
+   }
+   
+   method desactivar(){estaActivada = false}
+   method activar(){estaActivada = true}
+   
+}
 
 

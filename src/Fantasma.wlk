@@ -97,12 +97,12 @@ class Fantasma inherits Enemigo{
     override method tomarPuntosDeDanio(poderGolpe){
     	vida -= 1
     	if(not self.estaMuerto()){
-    	   game.sound("ghost_damage.mp3").play()
+    	   musica.activarSonido("ghost_damage.mp3") 
     	   const x = (coordenadas.x().anyOne()).truncate(0) 
 		   const y = (coordenadas.y().anyOne()).truncate(0) 
 	       position = game.at(x,y)
     	}else{
-    	  game.sound("ghost_dead.mp3").play()	
+    	  musica.activarSonido("ghost_dead.mp3") 
     	  fantasmas.fantasmaEsLiberado() 
     	  self.seDetiene()	
     	  nivel2.terminarNivelSiCorresponde()

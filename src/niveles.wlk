@@ -43,7 +43,7 @@ object nivel1 inherits Nivel {
 	}
 	
 	override method iniciar(){
-	game.addVisual(telon)  //game.boardGround("Dojo.jpg")
+	game.addVisual(telon)  
 	telon.fondo(self.fondoDelNivel())
 	
 	game.addVisual(jugador)

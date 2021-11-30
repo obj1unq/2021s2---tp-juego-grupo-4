@@ -11,6 +11,7 @@ describe "Tests de Juego" {
 		game.clear()
 		game.addVisual(jugador)
 //		game.start()
+        musica.desactivar() 
 	}
 
  
@@ -92,17 +93,17 @@ test "pociones"{
 	jugador.energia(1)
 	const pocionEnergia =new Energia(position= game.at(0,0))
 	pocionEnergia.mejorar(jugador)
-	assert.equals(4, jugador.energia())
+	assert.equals(3, jugador.energia())
 	
 	jugador.vida(90)
 	const pocionVida =new Vida(position= game.at(0,0))
 	pocionVida.mejorar(jugador)
-	assert.equals(93, jugador.vida())
+	assert.equals(100, jugador.vida())
 	
 	jugador.poder(20)
 	const pocionPoder =new Ataque(position= game.at(0,0))
 	pocionPoder.mejorar(jugador)
-	assert.equals(23, jugador.poder())
+	assert.equals(30, jugador.poder())
 }
 
 }

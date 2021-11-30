@@ -22,7 +22,7 @@ object ninja inherits Enemigo{
 			
 	
 	override method seMueve(){
-		game.sound("ninja_jump.mp3").play()  // sonidito de grito  
+		musica.activarSonido("ninja_jump.mp3") // sonidito de grito  
 		const x = (coordenadas.x().anyOne()).truncate(0) 
 		const y = (coordenadas.y().anyOne()).truncate(0) 
 		

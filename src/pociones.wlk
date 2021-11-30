@@ -18,12 +18,15 @@ class Pocion inherits ObjetoEnPantalla {
 	 
 	override method tomarPuntosDeDanio(poderGolpe){
 		generadorDePociones.remover(self)
-		game.sound("destruir power up.mp3").play()
+		musica.activarSonido("destruir power up.mp3") 
+		//game.sound("destruir power up.mp3").play()
 	}
+
 
   override method mejorar(objeto){
   	generadorDePociones.remover(self)
-  	game.sound("agarrar power up.mp3").play()
+  	musica.activarSonido("agarrar power up.mp3") 
+  	//game.sound("agarrar power up.mp3").play()
   }
 	
 	
