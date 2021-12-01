@@ -9,6 +9,10 @@ object  fantasmas {
 	const property position = game.center() 
 	var property fantasmasRestantes   
   
+  	method agregarFantasma(fantasma){
+  		fantasmas.add(fantasma)	
+  	}
+  	
     method estanVencidos(){
     	return fantasmasRestantes == 0 
     }

@@ -13,7 +13,7 @@ import mago.*
 //|                                 NIVEL                                                            |
 //+--------------------------------------------------------------------------------------------------+
 
-class Nivel {  // => hacer herencia para todos los niveles 
+class Nivel {   
 	
 	method iniciar()
 	method agregarEventos()
@@ -103,14 +103,12 @@ object nivel1 inherits Nivel {
   	
   override method iniciar(){
   	
-  	const fantasma1 = new Fantasma( position = game.at(0, 0) )
-    const fantasma2 = new Fantasma( position = game.at(game.width() - 1, 0) )
-    const fantasma3 = new Fantasma( position = game.at(0, game.height() - 1) )
-    const fantasma4 = new Fantasma( position = game.at(game.width() - 1, game.height() - 1))
-  	fantasmas.fantasmas(#{fantasma1,fantasma2,fantasma3,fantasma4} )
+  	fantasmas.agregarFantasma(new Fantasma( position = game.at(0, 0)) )
+  	fantasmas.agregarFantasma(new Fantasma( position = game.at(game.width() - 1, 0)))
+  	fantasmas.agregarFantasma(new Fantasma( position = game.at(0, game.height() - 1)))
+  	fantasmas.agregarFantasma(new Fantasma( position = game.at(game.width() - 1, game.height() - 1)	))
+  		
   	fantasmas.fantasmasRestantes(4)
-  	
-  	
   	
   	game.addVisual(telon)   
 	telon.fondo(self.fondoDelNivel())
