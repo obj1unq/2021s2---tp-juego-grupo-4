@@ -8,7 +8,7 @@
 - Romero Carolina
 
 ## Capturas
-![Nivel1](file:///C:/Users/Admin/git/2021s2---tp-juego-grupo-4/assets/Nivel%201.JPG)
+![Nivel1](https://github.com/obj1unq/2021s2---tp-juego-grupo-4/blob/master/assets/Nivel%201.JPG)
 ![Nivel2](file:///C:/Users/Admin/git/2021s2---tp-juego-grupo-4/assets/nivel2.JPG)
 ![Nivel3](file:///C:/Users/Admin/git/2021s2---tp-juego-grupo-4/assets/Nivel3.JPG)
 
