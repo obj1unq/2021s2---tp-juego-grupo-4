@@ -9,12 +9,12 @@
 
 ## Capturas
 ![Nivel1](https://github.com/obj1unq/2021s2---tp-juego-grupo-4/blob/master/assets/Nivel%201.JPG)
-![Nivel2](file:///C:/Users/Admin/git/2021s2---tp-juego-grupo-4/assets/nivel2.JPG)
-![Nivel3](file:///C:/Users/Admin/git/2021s2---tp-juego-grupo-4/assets/Nivel3.JPG)
+![Nivel2](https://github.com/obj1unq/2021s2---tp-juego-grupo-4/blob/master/assets/nivel2.JPG)
+![Nivel3](https://github.com/obj1unq/2021s2---tp-juego-grupo-4/blob/master/assets/Nivel3.JPG)
 
 ## Reglas de Juego / Instrucciones
 
-- El jugador debe luchar contra las amenazas de cada nivel para salir       victorioso
+- El jugador debe luchar contra las amenazas de cada nivel para salir victorioso
 - Para atacar existen 3 teclas X hacia arriba, Z hacia la izquierda y 
   C hacia la derecha
 - El jugador posee 100 de vida, 4 de energía que se gasta con cada ataque
